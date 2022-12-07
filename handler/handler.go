@@ -24,11 +24,9 @@ func init() {
 }
 
 func Handler(msg *openwechat.Message) {
-	if msg.IsSendByGroup() {
-		err := handlers[GroupHandler].handle(msg)
-		if err != nil {
-			log.Errorf("handle error: %s\n", err.Error())
-			return
-		}
+	err := handlers[GroupHandler].handle(msg)
+	if err != nil {
+		log.Errorf("handle error: %s\n", err.Error())
+		return
 	}
 }

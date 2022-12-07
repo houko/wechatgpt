@@ -57,7 +57,7 @@ func Completions(msg string, token string) (*string, error) {
 	requestBody := ChatGPTRequestBody{
 		Model:            "text-davinci-003",
 		Prompt:           msg,
-		MaxTokens:        100,
+		MaxTokens:        4000,
 		Temperature:      1,
 		TopP:             1,
 		FrequencyPenalty: 0,
