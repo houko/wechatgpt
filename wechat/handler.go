@@ -1,4 +1,4 @@
-package handler
+package wechat
 
 import (
 	"github.com/eatmoreapple/openwechat"

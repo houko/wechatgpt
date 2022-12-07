@@ -1,4 +1,4 @@
-package handler
+package wechat
 
 import (
 	"errors"

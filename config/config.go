@@ -8,11 +8,16 @@ var config *Config
 
 type Config struct {
 	ChatGpt ChatGptConfig `json:"chatgpt"`
+	Slack   SlackConfig   `json:"slack"`
 }
 
 type ChatGptConfig struct {
 	Keyword string `json:"keyword,omitempty"`
 	Token   string `json:"token,omitempty" json:"token,omitempty"`
+}
+
+type SlackConfig struct {
+	Token string `json:"token"`
 }
 
 func LoadConfig() error {

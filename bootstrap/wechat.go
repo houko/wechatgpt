@@ -3,12 +3,12 @@ package bootstrap
 import (
 	"github.com/eatmoreapple/openwechat"
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/handler"
+	"github.com/wechatgpt/wechatbot/wechat"
 )
 
-func Run() {
+func StartWebChat() {
 	bot := openwechat.DefaultBot(openwechat.Desktop)
-	bot.MessageHandler = handler.Handler
+	bot.MessageHandler = wechat.Handler
 	bot.UUIDCallback = openwechat.PrintlnQrcodeUrl
 
 	reloadStorage := openwechat.NewJsonFileHotReloadStorage("token.json")
@@ -28,9 +28,14 @@ func Run() {
 	}
 
 	friends, err := self.Friends()
-	log.Println(friends, err)
+
+	for i, friend := range friends {
+		log.Println(i, friend)
+	}
 	groups, err := self.Groups()
-	log.Println(groups, err)
+	for i, group := range groups {
+		log.Println(i, group)
+	}
 
 	err = bot.Block()
 	if err != nil {
