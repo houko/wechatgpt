@@ -37,10 +37,11 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		return errors.New("can not get appConfig file,please check")
 	}
 
-	if !strings.Contains(msg.Content, appConfig.ChatGpt.Keyword) {
+	keyword := appConfig.ChatGpt.Keyword
+	if !strings.Contains(msg.Content, keyword) {
 		return nil
 	}
-	splitItems := strings.Split(msg.Content, appConfig.ChatGpt.Keyword)
+	splitItems := strings.Split(msg.Content, keyword)
 	if len(splitItems) < 2 {
 		return nil
 	}
@@ -52,7 +53,7 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		if err != nil {
 			return err
 		}
-		fmt.Println(text)
+		log.Println(text)
 		return err
 	}
 

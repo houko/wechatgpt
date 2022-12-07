@@ -2,7 +2,7 @@ package handler
 
 import (
 	"github.com/eatmoreapple/openwechat"
-	"github.com/prometheus/common/log"
+	log "github.com/sirupsen/logrus"
 )
 
 type MessageHandlerInterface interface {
