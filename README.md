@@ -106,4 +106,4 @@ INFO[0099] 3 <Friend:wloscar>
 ![img.png](screenshots/billing.png)
 
 # 协议
-[LICENSE](LICENSE)
+[MIT LICENSE](LICENSE)
