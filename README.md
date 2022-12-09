@@ -15,7 +15,13 @@ cp config/config.yaml.example local/config.yaml
 ```
 
 ## 修改你的token
-打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个token并把token放到
+打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个token并把token放到local/coonfig.yaml的token下
+
+```
+chatgpt:
+  keyword: 小莫
+  token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
+```
 
 ## 运行App
 ```
