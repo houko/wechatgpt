@@ -1,3 +1,5 @@
+欢迎使用`wechatgpt`微信机器人
+
 <p>
 <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=86400" />
   <a href="#" target="_blank">
@@ -8,7 +10,10 @@
   </a>
 </p>
 
-# 准备运行环境
+## 仓库地址
+https://github.com/houko/wechatgpt
+
+## 准备运行环境
 ```
 go mod tidy 
 cp config/config.yaml.example local/config.yaml
