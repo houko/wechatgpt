@@ -73,7 +73,7 @@ INFO[0099] 3 <Friend:wloscar>
 ## 使用场景3
 自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。   
 
-<img src="screenshots/IMG_3844.png" alt="drawing" style="width:200px;"/>
+<img src="screenshots/IMG_3843.png" alt="drawing" style="width:200px;"/>
 
 
 ## 总结
@@ -88,4 +88,6 @@ INFO[0099] 3 <Friend:wloscar>
 这不比对象来的贴心？    
 
 用chatgpt写了个微信机器人结果变爸爸了   
+
+
 <iframe src="//player.bilibili.com/player.html?aid=691101581&bvid=BV1B24y1Q7us&cid=917579057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
