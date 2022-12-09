@@ -91,3 +91,6 @@ INFO[0099] 3 <Friend:wloscar>
 
 ## 变爸爸事件
 [用chatgpt写了个微信机器人结果变爸爸了](https://www.bilibili.com/video/BV1B24y1Q7us/)
+
+##
+如果大家有玩的时候有遇到一些奇怪的对话可以截图发PR分享给大家。另外对本项目有什么想法或者贡献的话欢迎提[issue](https://github.com/houko/wechatgpt/issues)或[pr](https://github.com/houko/wechatgpt/pulls)
