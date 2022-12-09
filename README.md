@@ -82,12 +82,13 @@ INFO[0099] 3 <Friend:wloscar>
 
 
 ## 意外之喜
-<img src="screenshots/IMG_3844.png" alt="drawing" style="width:250px;"/>   
+<img src="screenshots/IMG_3843.png" alt="drawing" style="width:250px;"/>   
 
 这不比对象来的贴心？    
 
 ## 变爸爸事件
+放在B站
 [用chatgpt写了个微信机器人结果变爸爸了](https://www.bilibili.com/video/BV1B24y1Q7us/)
 
-##
+## 贡献本仓库
 如果大家有玩的时候有遇到一些奇怪的对话可以截图发PR分享给大家。另外对本项目有什么想法或者贡献的话欢迎提[issue](https://github.com/houko/wechatgpt/issues)或[pr](https://github.com/houko/wechatgpt/pulls)
