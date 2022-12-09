@@ -48,7 +48,7 @@ INFO[0099] 3 <Friend:wloscar>
 登陆成功后会拉取微信的好友和群组
 
 ## 如何使用
-默认为`chatgpt`，如果想设置其他的触发方式可以修改`local/config.yaml`的keyword。此时在`微信同步助手中`发送消息后，`chatgpt`就会回复你
+默认为`chatgpt`，如果想设置其他的触发方式可以修改`local/config.yaml`的keyword。此时，如果别人给你发消息带有关键字`chatgpt`，你的微信就会调整用`chaget`AI自动回复你的好友。
 
 
 
