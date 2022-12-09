@@ -62,12 +62,14 @@ INFO[0099] 3 <Friend:wloscar>
 
 <img src="screenshots/IMG_3837.png" alt="drawing" style="width:200px;"/>
 <img src="screenshots/IMG_3840.png" alt="drawing" style="width:200px;"/>
+<img src="screenshots/IMG_3850.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景2
 别人在群里发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。   
 
 <img src="screenshots/IMG_3845.png" alt="drawing" style="width:200px;"/>
+<img src="screenshots/IMG_3847.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景3
@@ -90,4 +92,6 @@ INFO[0099] 3 <Friend:wloscar>
 用chatgpt写了个微信机器人结果变爸爸了   
 
 
+<p>
 <iframe src="//player.bilibili.com/player.html?aid=691101581&bvid=BV1B24y1Q7us&cid=917579057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+</p>
