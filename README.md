@@ -1,3 +1,4 @@
+<p>
 <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=86400" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
@@ -5,6 +6,7 @@
   <a href="https://twitter.com/xiaomoinfo" target="_blank">
     <img alt="Twitter: xiaomoinfo" src="https://img.shields.io/twitter/follow/xiaomoinfo.svg?style=social" />
   </a>
+</p>
 
 # 准备运行环境
 ```
