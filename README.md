@@ -58,31 +58,34 @@ INFO[0099] 3 <Friend:wloscar>
 当然，在群里也是可以的。
 
 ## 使用场景1
-别人给你发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。
+别人给你发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。    
+
 <img src="screenshots/IMG_3837.png" alt="drawing" style="width:200px;"/>
 <img src="screenshots/IMG_3840.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景2
-别人在群里发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。
+别人在群里发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。   
+
 <img src="screenshots/IMG_3845.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景3
-自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。
+自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。   
+
 <img src="screenshots/IMG_3844.png" alt="drawing" style="width:200px;"/>
 
 
 ## 总结
-- 你可以把它当作你的智能助理，帮助你快速回复消息。
-- 你可以把它当作一个智能机器人，邀请在群里之后通过关键字帮助大家解答问题。
-- 你可以把它当作你的智多星，有什么问题不懂的时候随时问它。
+- 你可以把它当作你的智能助理，帮助你快速回复消息。   
+- 你可以把它当作一个智能机器人，邀请在群里之后通过关键字帮助大家解答问题。   
+- 你可以把它当作你的智多星，有什么问题不懂的时候随时问它。   
 
 
 ## 意外之喜
-<img src="screenshots/IMG_3844.png" alt="drawing" style="width:200px;"/>
+<img src="screenshots/IMG_3844.png" alt="drawing" style="width:200px;"/>   
 
-这不比对象来的贴心？
+这不比对象来的贴心？    
 
-用chatgpt写了个微信机器人结果变爸爸了
+用chatgpt写了个微信机器人结果变爸爸了   
 <iframe src="//player.bilibili.com/player.html?aid=691101581&bvid=BV1B24y1Q7us&cid=917579057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
