@@ -96,5 +96,5 @@ INFO[0099] 3 <Friend:wloscar>
 ## Q&A
 
 ### 1. 返回错误`invalid_api_key`
-这是因为openai的API需要付费，价格非常便宜具体可以官网查看。按照如下参考绑定一下信息卡就可以正常使用了，如果还是有错就把token删掉重新建一个。
+这是因为openai的API需要付费，价格非常便宜具体可以官网查看。按照如下参考绑定一下信息卡就可以正常使用了，如果还是有错就把`API Key`删掉重新建一个。
 ![img.png](screenshots/billing.png)
