@@ -21,7 +21,7 @@ cp config/config.yaml.example local/config.yaml
 ```
 
 ## 修改你的token
-打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`的token下
+打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`的token下，请看如下示例：
 
 ```
 chatgpt:
