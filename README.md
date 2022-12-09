@@ -89,9 +89,5 @@ INFO[0099] 3 <Friend:wloscar>
 
 这不比对象来的贴心？    
 
-用chatgpt写了个微信机器人结果变爸爸了   
-
-
-<p>
-<iframe src="//player.bilibili.com/player.html?aid=691101581&bvid=BV1B24y1Q7us&cid=917579057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-</p>
+## 变爸爸事件
+[用chatgpt写了个微信机器人结果变爸爸了](https://www.bilibili.com/video/BV1B24y1Q7us/)
