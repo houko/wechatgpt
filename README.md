@@ -92,3 +92,9 @@ INFO[0099] 3 <Friend:wloscar>
 
 ## 贡献本仓库
 如果大家有玩的时候有遇到一些奇怪的对话可以截图发PR分享给大家。另外对本项目有什么想法或者贡献的话欢迎提[issue](https://github.com/houko/wechatgpt/issues)或[pr](https://github.com/houko/wechatgpt/pulls)
+
+## Q&A
+
+### 1. 返回错误`invalid_api_key`
+这是因为openai的API需要付费，价格非常便宜具体可以官网查看。按照如下参考绑定一下信息卡就可以正常使用了，如果还是有错就把token删掉重新建一个。
+![img.png](screenshots/billing.png)
