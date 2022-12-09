@@ -21,7 +21,7 @@ cp config/config.yaml.example local/config.yaml
 ```
 
 ## 修改你的token
-打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个token并把token放到`local/config.yaml`的token下
+打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`的token下
 
 ```
 chatgpt:
@@ -46,7 +46,7 @@ go: downloading golang.org/x/sys v0.0.0-20220908164124-27713097b956
 https://login.weixin.qq.com/qrcode/QedkOe1I4w==
 ```
 
-会自动打开默认浏览器，如果没有打开也可以打动点击上面的链接打开二维码扫微信
+会自动打开默认浏览器，如果没有打开也可以手动点击上面的链接打开二维码扫微信
 
 ```
 2022/12/09 15:15:00 登录成功
