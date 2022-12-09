@@ -1,4 +1,4 @@
-欢迎使用`wechatgpt`微信机器人
+## 欢迎使用`wechatgpt`微信机器人
 
 <p>
 <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=86400" />
