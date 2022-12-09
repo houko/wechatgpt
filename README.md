@@ -60,22 +60,19 @@ INFO[0099] 3 <Friend:wloscar>
 ## 使用场景1
 别人给你发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。    
 
-<img src="screenshots/IMG_3837.png" alt="drawing" style="width:200px;display: inline"/>
-<img src="screenshots/IMG_3840.png" alt="drawing" style="width:200px;display: inline"/>
-<img src="screenshots/IMG_3850.png" alt="drawing" style="width:200px;display: inline"/>
+<img src="screenshots/IMG_3837.png" alt="drawing" style="width:200px;"/><img src="screenshots/IMG_3840.png" alt="drawing" style="width:200px;"/><img src="screenshots/IMG_3850.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景2
 别人在群里发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。   
 
-<img src="screenshots/IMG_3845.png" alt="drawing" style="width:200px;display: inline"/>
-<img src="screenshots/IMG_3847.png" alt="drawing" style="width:200px;display: inline"/>
+<img src="screenshots/IMG_3845.png" alt="drawing" style="width:200px;"/><img src="screenshots/IMG_3847.png" alt="drawing" style="width:200px;"/>
 
 
 ## 使用场景3
 自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。   
 
-<img src="screenshots/IMG_3843.png" alt="drawing" style="width:200px;display: inline"/>
+<img src="screenshots/IMG_3843.png" alt="drawing" style="width:200px;"/>
 
 
 ## 总结
