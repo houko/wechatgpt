@@ -80,7 +80,7 @@ INFO[0099] 3 <Friend:wloscar>
 ## 使用场景3
 自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。   
 
-<img src="screenshots/IMG_3843.png" alt="drawing" style="width:250px;"/>
+<img src="screenshots/IMG_3844.png" alt="drawing" style="width:250px;"/>
 
 
 ## 总结
