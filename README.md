@@ -23,6 +23,8 @@ cp config/config.yaml.example local/config.yaml
 ## 修改你的token
 打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`的token下，请看如下示例：
 
+大陆用户注册`openai`请参考 [注册ChatGPT详细指南](https://sms-activate.org/cn/info/ChatGPT)
+
 ```
 chatgpt:
   keyword: 小莫
@@ -104,6 +106,19 @@ INFO[0099] 3 <Friend:wloscar>
 ### 1. 返回错误`invalid_api_key`
 这是因为openai的API需要付费，价格非常便宜具体可以官网查看。按照如下参考绑定一下信息卡就可以正常使用了，如果还是有错就把`API Key`删掉重新建一个。
 ![img.png](screenshots/billing.png)
+
+### 2. Cannot load io/fs: malformed module path "io/fs": missing dot in first path element
+golang版本太低，需要1.16以上，查看方式为`go version`
+```
+$ go version
+go version go1.17.3 linux/amd64
+```
+
+### 3. 扫码登陆时出现错误 FATA【0023】write token.json: bad file descriptor
+删除项目根目录下的`token.json`后重新扫码登陆即可
+
+### 4. go: github.com/eatmoreapple/openwechat@v1.2.1: Get https://proxy.golang.org/github.com/eatmoreapple/openwechat/@v/v1.2.1.mod: dial tcp 142.251.43.17:443: connect: connection refused
+自身网络环境问题，请排查网络设置
 
 # 协议
 [MIT LICENSE](LICENSE)
