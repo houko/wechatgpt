@@ -108,7 +108,7 @@ INFO[0099] 3 <Friend:wloscar>
 ![img.png](screenshots/billing.png)
 
 ### 2. Cannot load io/fs: malformed module path "io/fs": missing dot in first path element
-golang版本太低，需要1.16以上，查看方式为`go version`
+golang版本太低，需要`1.16`以上，查看方式为`go version`
 ```
 $ go version
 go version go1.17.3 linux/amd64
@@ -117,7 +117,10 @@ go version go1.17.3 linux/amd64
 ### 3. 扫码登陆时出现错误 FATA【0023】write token.json: bad file descriptor
 删除项目根目录下的`token.json`后重新扫码登陆即可
 
-### 4. go: github.com/eatmoreapple/openwechat@v1.2.1: Get https://proxy.golang.org/github.com/eatmoreapple/openwechat/@v/v1.2.1.mod: dial tcp 142.251.43.17:443: connect: connection refused
+### 4. go mod tidy时connect: connection refused
+```
+go: github.com/eatmoreapple/openwechat@v1.2.1: Get https://proxy.golang.org/github.com/eatmoreapple/openwechat/@v/v1.2.1.mod: dial tcp 142.251.43.17:443:
+```
 自身网络环境问题，请排查网络设置
 
 # 协议
