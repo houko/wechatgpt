@@ -1,4 +1,4 @@
-## 欢迎使用`wechatgpt`智能机器人，Let's Chat with ChatGPT
+# 欢迎使用`wechatgpt`智能机器人，Let's Chat with ChatGPT
 如果觉得不错，请麻烦点个`Star`，非常感谢。
 
 <p>
@@ -11,16 +11,16 @@
   </a>
 </p>
 
-## 仓库地址
+# 仓库地址
 https://github.com/houko/wechatgpt
 
-## 准备运行环境
+# 准备运行环境
 ```
 go mod tidy 
 cp config/config.yaml.example local/config.yaml
 ```
 
-## 修改你的token
+# 修改你的token
 打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`的token下，请看如下示例：
 
 大陆用户注册`openai`请参考 [注册ChatGPT详细指南](https://sms-activate.org/cn/info/ChatGPT)
@@ -31,7 +31,7 @@ chatgpt:
   token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
 ```
 
-## 运行App
+# 运行App
 ```
 go run main.go
 ```
@@ -86,11 +86,6 @@ INFO[0099] 3 <Friend:wloscar>
 <img src="screenshots/IMG_3844.png" alt="drawing" style="width:250px;"/>
 
 
-## 总结
-- 你可以把它当作你的智能助理，帮助你快速回复消息。   
-- 你可以把它当作一个智能机器人，邀请在群里之后通过关键字帮助大家解答问题。   
-- 你可以把它当作你的智多星，有什么问题不懂的时候随时问它。   
-
 
 ## 意外之喜
 <img src="screenshots/IMG_3843.png" alt="drawing" style="width:250px;"/>   
@@ -117,14 +112,21 @@ chatgpt:
 
 <img src="screenshots/IMG_3991.png" alt="drawing" style="width:250px;"/>
 
-## 变爸爸事件
+
+## 总结
+- 你可以把它当作你的智能助理，帮助你快速回复消息。
+- 你可以把它当作一个智能机器人，邀请在群里之后通过关键字帮助大家解答问题。
+- 你可以把它当作你的智多星，有什么问题不懂的时候随时问它。
+
+
+# 变爸爸事件
 放在B站
 [用chatgpt写了个微信机器人结果变爸爸了](https://www.bilibili.com/video/BV1B24y1Q7us/)
 
-## 贡献本仓库
+# 贡献本仓库
 如果大家有玩的时候有遇到一些奇怪的对话可以截图发PR分享给大家。另外对本项目有什么想法或者贡献的话欢迎提[issue](https://github.com/houko/wechatgpt/issues)或[pr](https://github.com/houko/wechatgpt/pulls)
 
-## Q&A
+# Q&A
 
 ### 1. 返回错误`invalid_api_key`
 这是因为`openai`的`API`需要付费，价格非常便宜具体可以官网查看。按照如下参考绑定一下信息卡就可以正常使用了，如果还是有错就把`API Key`删掉重新建一个。
