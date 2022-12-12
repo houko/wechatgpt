@@ -103,7 +103,15 @@ INFO[0099] 3 <Friend:wloscar>
 ![chatbot](screenshots/telegram.png)
 
 - 方式2：自己部署   
-修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动     
+修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动
+
+```
+chatgpt:
+  keyword: 小莫
+  token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
+  telegram: 5718911250:AAhR1pn52xcCFoM_GyI2g9BaX18S7WbYviQ 
+```
+
 `token`获取方式，请在telegram中添加好友`@botFather`并按提示操作
 
 ![telegram](screenshots/IMG_3991.png)
