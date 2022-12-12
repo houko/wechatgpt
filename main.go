@@ -10,5 +10,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	bootstrap.StartTelegramBot()
 	bootstrap.StartWebChat()
 }

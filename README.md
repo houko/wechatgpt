@@ -1,8 +1,8 @@
-## 欢迎使用`wechatgpt`微信机器人
+## 欢迎使用`wechatgpt`智能机器人，Let's Chat with ChatGPT
 如果觉得不错，请麻烦点个`Star`，非常感谢。
 
 <p>
-<img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=86400" />
+<img alt="Version" src="https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=86400" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
   </a>
@@ -36,6 +36,9 @@ chatgpt:
 go run main.go
 ```
 
+
+
+## 微信
 ```
 ain.go #gosetup
 go: downloading github.com/eatmoreapple/openwechat v1.2.1
@@ -92,7 +95,19 @@ INFO[0099] 3 <Friend:wloscar>
 ## 意外之喜
 <img src="screenshots/IMG_3843.png" alt="drawing" style="width:250px;"/>   
 
-这不比对象来的贴心？    
+这不比对象来的贴心？   
+
+
+## telegram机器人使用方式
+- 方式1: 直接添加小莫的bot进行使用
+![chatbot](screenshots/telegram.png)
+
+- 方式2：自己部署   
+修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动     
+`token`获取方式，请在telegram中添加好友`@botFather`并按提示操作
+
+![telegram](screenshots/IMG_3991.png)
+
 
 ## 变爸爸事件
 放在B站
