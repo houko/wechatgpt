@@ -99,13 +99,12 @@ INFO[0099] 3 <Friend:wloscar>
 
 
 ## telegram机器人使用方式
-- 方式1: 直接添加小莫的bot进行使用
-  <img src="screenshots/telegram.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3847.png" alt="drawing" style="width:250px;"/>
-
+- 方式1: 直接添加小莫的bot进行使用     
+  <img src="screenshots/telegram.png" alt="drawing" style="width:250px;"/>
 
 
 - 方式2：自己部署   
-修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动
+修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动   
 
 ```
 chatgpt:
@@ -114,7 +113,7 @@ chatgpt:
   telegram: 5718911250:AAhR1pn52xcCFoM_GyI2g9BaX18S7WbYviQ 
 ```
 
-`token`获取方式，请在telegram中添加好友`@botFather`并按提示操作
+`token`获取方式，请在telegram中添加好友`@botFather`并按提示操作    
 
 <img src="screenshots/IMG_3991.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3847.png" alt="drawing" style="width:250px;"/>
 
