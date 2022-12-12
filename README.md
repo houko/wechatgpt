@@ -104,7 +104,7 @@ INFO[0099] 3 <Friend:wloscar>
 
 
 - 方式2：自己部署   
-修改 config下的 chatgpt.telegram的token后运行`go run main.go`进行启动   
+修改 config下的 `chatgpt.telegram`的token后运行`go run main.go`进行启动，参考如下：   
 
 ```
 chatgpt:
@@ -115,9 +115,7 @@ chatgpt:
 
 `token`获取方式，请在telegram中添加好友`@botFather`并按提示操作    
 
-<img src="screenshots/IMG_3991.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3847.png" alt="drawing" style="width:250px;"/>
-
-
+<img src="screenshots/IMG_3991.png" alt="drawing" style="width:250px;"/>
 
 ## 变爸爸事件
 放在B站
