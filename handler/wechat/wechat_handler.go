@@ -56,6 +56,18 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		log.Println(text)
 		return err
 	}
+	// 如果在提问的时候没有包含？,AI会自动在开头补充个？看起来很奇怪
+	result := *reply
+	if strings.HasPrefix(result, "?") {
+		result = strings.Replace(result, "?", "", -1)
+	}
+	if strings.HasPrefix(result, "？") {
+		result = strings.Replace(result, "？", "", -1)
+	}
+	// 微信不支持markdown格式，所以把反引号直接去掉
+	if strings.HasPrefix(result, "`") {
+		result = strings.Replace(result, "`", "", -1)
+	}
 
 	if reply != nil {
 		_, err = msg.ReplyText(*reply)
