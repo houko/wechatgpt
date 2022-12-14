@@ -6,6 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/openai"
+	"github.com/wechatgpt/wechatbot/utils"
 	"os"
 	"strings"
 )
@@ -42,10 +43,11 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		}
 	}
 
-	if !strings.Contains(msg.Content, keyword) {
+	content, key := utils.ContainsI(msg.Content, keyword)
+	if len(key) == 0 {
 		return nil
 	}
-	splitItems := strings.Split(msg.Content, keyword)
+	splitItems := strings.Split(content, key)
 	if len(splitItems) < 2 {
 		return nil
 	}

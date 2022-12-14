@@ -1,0 +1,23 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "Building for target: $TASKFILE_PARAM_target"
+
+  hello:
+    cmds:
+      - echo "Building for target: $TASKFILE_PARAM_target"
+
+
+  release:
+    cmds:
+      - docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:latest .
+      - docker push xiaomoinfo/wechatgpt-amd64:latest
+      - docker build -t xiaomoinfo/wechatgpt:latest .
+      - docker push xiaomoinfo/wechatgpt:latest
