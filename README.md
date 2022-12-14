@@ -47,7 +47,12 @@ go run main.go
 同时启动微信和telegram，微信登陆的地址请查看运行日志
 
 ```
+# apple silicon 
 docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  xiaomoinfo/wechatgpt:latest
+
 ```
 
 
@@ -55,7 +60,11 @@ docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你�
 如果只想运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志
 
 ```
+# apple silicon
 docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
