@@ -6,6 +6,7 @@ import (
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/openai"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -31,10 +32,12 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	group := openwechat.Group{User: sender}
 	log.Printf("Received Group %v Text Msg : %v", group.NickName, msg.Content)
 
-	keyword := "chatgpt"
-	appConfig := config.GetConfig()
-	if appConfig != nil {
-		keyword = appConfig.ChatGpt.Keyword
+	keyword := os.Getenv("wechat")
+	if len(keyword) == 0 {
+		appConfig := config.GetConfig()
+		if appConfig != nil {
+			keyword = appConfig.ChatGpt.Keyword
+		}
 	}
 
 	if !strings.Contains(msg.Content, keyword) {
