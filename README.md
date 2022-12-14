@@ -44,16 +44,15 @@ go run main.go
 
 ## `Docker` 方式运行`wechatgpt`
 
-同时启动微信和telegram   
+同时启动微信和telegram，微信登陆的地址请查看运行日志
 
 ```
 docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  wechatgpt:latest
 ```
-微信登陆的地址请查看运行日志   
 
 
 
-如果只想运行微信智能机器人的话运行下面这段代码  
+如果只想运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志
 
 ```
 docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" wechatgpt:latest
