@@ -67,6 +67,7 @@ docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" -e wechat="触�
 docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" -e wechat="触发关键字" xiaomoinfo/wechatgpt-amd64:latest
 
 ```
+<img src="screenshots/docker部署.png" alt="drawing" style="width:250px;"/>
 
 ### 微信
 

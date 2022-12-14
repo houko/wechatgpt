@@ -3,9 +3,9 @@ package wechat
 import (
 	"fmt"
 	"github.com/eatmoreapple/openwechat"
+	log "github.com/sirupsen/logrus"
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/openai"
-	"log"
 	"os"
 	"strings"
 )
@@ -37,6 +37,8 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		appConfig := config.GetConfig()
 		if appConfig != nil {
 			keyword = appConfig.ChatGpt.Keyword
+		} else {
+			keyword = "chatgpt"
 		}
 	}
 
@@ -48,6 +50,7 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 		return nil
 	}
 	requestText := strings.TrimSpace(splitItems[1])
+	log.Println("问题：%s", requestText)
 	reply, err := openai.Completions(requestText)
 	if err != nil {
 		log.Println(err)
