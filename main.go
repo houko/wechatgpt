@@ -1,6 +1,7 @@
 package main
 
 import (
+	log "github.com/sirupsen/logrus"
 	"github.com/wechatgpt/wechatbot/bootstrap"
 	"github.com/wechatgpt/wechatbot/config"
 )
@@ -8,7 +9,7 @@ import (
 func main() {
 	err := config.LoadConfig()
 	if err != nil {
-		panic(err)
+		log.Warn("没有找到配置文件，尝试读取环境变量")
 	}
 	go bootstrap.StartTelegramBot()
 	bootstrap.StartWebChat()
