@@ -58,7 +58,6 @@ docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你�
 docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" wechatgpt:latest
 
 ```
-微信登陆的地址请查看运行日志
 
 ### 微信
 
