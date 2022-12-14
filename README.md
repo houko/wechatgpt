@@ -51,7 +51,7 @@ go run main.go
 docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  xiaomoinfo/wechatgpt:latest
 
 # linux amd64
-docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  xiaomoinfo/wechatgpt:latest
+docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token"  xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
