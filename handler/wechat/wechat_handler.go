@@ -56,10 +56,18 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	reply, err := openai.Completions(requestText)
 	if err != nil {
 		log.Println(err)
-		text, err := msg.ReplyText(fmt.Sprintf("bot error: %s", err.Error()))
-		if err != nil {
-			return err
+		if reply != nil {
+			result := *reply
+			// 如果文字超过4000个字会回错，截取前4000个文字进行回复
+			if len(result) > 4000 {
+				_, err = msg.ReplyText(result[:4000])
+				if err != nil {
+					log.Println("回复出错：", err.Error())
+					return err
+				}
+			}
 		}
+		text, err := msg.ReplyText(fmt.Sprintf("bot error: %s", err.Error()))
 		log.Println(text)
 		return err
 	}
