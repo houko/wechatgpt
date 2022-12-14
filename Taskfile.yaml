@@ -8,12 +8,7 @@ vars:
 tasks:
   default:
     cmds:
-      - echo "Building for target: $TASKFILE_PARAM_target"
-
-  hello:
-    cmds:
-      - echo "Building for target: $TASKFILE_PARAM_target"
-
+      - task release
 
   release:
     cmds:
