@@ -33,17 +33,17 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	group := openwechat.Group{User: sender}
 	log.Printf("Received Group %v Text Msg : %v", group.NickName, msg.Content)
 
-	keyword := os.Getenv("wechat")
-	if len(keyword) == 0 {
+	wechat := os.Getenv("wechat")
+	if len(wechat) == 0 {
 		appConfig := config.GetConfig()
-		if appConfig != nil {
-			keyword = appConfig.ChatGpt.Keyword
+		if appConfig.ChatGpt.Wechat != nil {
+			wechat = *appConfig.ChatGpt.Wechat
 		} else {
-			keyword = "chatgpt"
+			wechat = "chatgpt"
 		}
 	}
 
-	content, key := utils.ContainsI(msg.Content, keyword)
+	content, key := utils.ContainsI(msg.Content, wechat)
 	if len(key) == 0 {
 		return nil
 	}

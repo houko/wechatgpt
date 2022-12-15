@@ -11,9 +11,9 @@ type Config struct {
 }
 
 type ChatGptConfig struct {
-	Keyword  string `json:"keyword,omitempty"`
-	Token    string `json:"token,omitempty" json:"token,omitempty"`
-	Telegram string `json:"telegram"`
+	Wechat   *string `json:"wechat,omitempty"`
+	Token    string  `json:"token,omitempty" json:"token,omitempty"`
+	Telegram *string `json:"telegram"`
 }
 
 func LoadConfig() error {

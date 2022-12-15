@@ -18,7 +18,10 @@ func StartTelegramBot() {
 			return
 		}
 		botConfig := getConfig.ChatGpt
-		telegramKey = botConfig.Telegram
+		if botConfig.Telegram == nil {
+			return
+		}
+		telegramKey = *botConfig.Telegram
 		log.Info("读取本地本置文件中的telegram token:", telegramKey)
 	} else {
 		log.Info("找到环境变量: telegram token:", telegramKey)

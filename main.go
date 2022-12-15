@@ -13,4 +13,7 @@ func main() {
 	}
 	go bootstrap.StartTelegramBot()
 	bootstrap.StartWebChat()
+	//
+	//// 阻塞进程
+	select {}
 }

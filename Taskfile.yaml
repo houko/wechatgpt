@@ -16,3 +16,10 @@ tasks:
       - docker push xiaomoinfo/wechatgpt-amd64:latest
       - docker build -t xiaomoinfo/wechatgpt:latest .
       - docker push xiaomoinfo/wechatgpt:latest
+
+  2.4:
+    cmds:
+      - docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:2.4 .
+      - docker push xiaomoinfo/wechatgpt-amd64:2.4
+      - docker build -t xiaomoinfo/wechatgpt:2.4 .
+      - docker push xiaomoinfo/wechatgpt:2.4

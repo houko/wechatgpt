@@ -1,4 +1,4 @@
 chatgpt:
-  keyword: chatgpt
-  token: your token
+  wechat: chatgpt
+  token: your chatgpt apiKey
   telegram: your telegram token

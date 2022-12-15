@@ -28,13 +28,14 @@ cp config/config.yaml.example local/config.yaml
 打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`
 的token下，请看如下示例：
 
-大陆用户注册`openai`请参考 [注册ChatGPT详细指南](https://sms-activate.org/cn/info/ChatGPT)
-
 ```
 chatgpt:
-  keyword: 小莫
+  wechat: 小莫
   token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
+  telegram: your telegram token
 ```
+
+大陆用户注册`openai`请参考 [注册ChatGPT详细指南](https://sms-activate.org/cn/info/ChatGPT)
 
 ## 运行App
 
@@ -47,26 +48,62 @@ go run main.go
 同时启动微信和telegram，微信登陆的地址请查看运行日志
 
 ```
-# apple silicon 如果不加触发关键字的话默认为： chatgpt
-docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" -e wechat="触发关键字" telegram="你的telegram token"  xiaomoinfo/wechatgpt:latest
+# apple silicon
+docker run -d \
+--name="wechatgpt" \
+-e apiKey="你的chatgpt apiKey" \
+-e wechat="微信触发关键字" \
+-e telegram="你的telegram token"  \
+xiaomoinfo/wechatgpt:latest
 
-# linux amd64 如果不加触发关键字的话默认为： chatgpt
-docker run -d --name="wechatgpt" -e apiKey="你的chatgpt apiKey" telegram="你的telegram token" -e wechat="触发关键字"  xiaomoinfo/wechatgpt-amd64:latest
+# linux amd64
+docker run -d \
+--name="wechatgpt" \
+-e apiKey="你的chatgpt apiKey" \
+-e wechat="微信触发关键字" \
+-e telegram="你的telegram token"  \
+xiaomoinfo/wechatgpt-amd64:latest
 
 ```
-
-
 
 如果只想运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志
 
 ```
-# apple silicon 如果不加触发关键字的话默认为： chatgpt
-docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" -e wechat="触发关键字" xiaomoinfo/wechatgpt:latest
+# apple silicon 
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e wechat="微信触发关键字" \
+xiaomoinfo/wechatgpt:latest
 
-# linux amd64 如果不加触发关键字的话默认为： chatgpt
-docker run -d --name wechatgpt -e apiKey="你的chatgpt apiKey" -e wechat="触发关键字" xiaomoinfo/wechatgpt-amd64:latest
+# linux amd64
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e wechat="微信触发关键字" \
+xiaomoinfo/wechatgpt-amd64:latest
 
 ```
+
+如果只想运行`telegram`智能机器人的话运行下面这段代码
+
+```
+# apple silicon
+docker run -d \ 
+--name wechatgpt \ 
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+xiaomoinfo/wechatgpt-amd64:latest
+
+```
+
 <img src="screenshots/docker部署.png" alt="drawing" style="width:250px;"/>
 
 ### 微信
@@ -99,7 +136,7 @@ INFO[0099] 3 <Friend:wloscar>
 
 ### 如何使用
 
-默认为`chatgpt`，如果想设置其他的触发方式可以修改`local/config.yaml`的keyword。此时，如果别人给你发消息带有关键字`chatgpt`
+默认为`chatgpt`，如果想设置其他的触发方式可以修改`local/config.yaml`的wechat。此时，如果别人给你发消息带有关键字`chatgpt`
 ，你的微信就会调用`chatGPT`AI自动回复你的好友。
 当然，在群里也是可以的。
 
@@ -138,7 +175,7 @@ INFO[0099] 3 <Friend:wloscar>
 
 ```
 chatgpt:
-  keyword: 小莫
+  wechat: 小莫
   token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
   telegram: 5718911250:AAhR1pn52xcCFoM_GyI2g9BaX18S7WbYviQ 
 ```
