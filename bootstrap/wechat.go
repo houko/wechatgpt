@@ -6,6 +6,7 @@ import (
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/handler/wechat"
 	"os"
+	"strings"
 )
 
 func StartWebChat() {
@@ -52,7 +53,7 @@ func StartWebChat() {
 
 func getKeyword() string {
 	keyword := os.Getenv("wechat")
-	if len(keyword) == 0 {
+	if len(strings.Trim(keyword, " ")) == 0 {
 		gptConfig := config.GetConfig()
 		if gptConfig != nil {
 			if gptConfig.ChatGpt.Wechat != nil {
