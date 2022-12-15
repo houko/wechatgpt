@@ -104,7 +104,7 @@ xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
-<img src="screenshots/docker部署.png" alt="drawing" style="width:250px;"/>
+<img src="screenshots/docker部署.png" alt="drawing" style="width:450px;"/>
 
 ### 微信
 
