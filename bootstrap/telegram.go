@@ -7,6 +7,7 @@ import (
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/handler/telegram"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -47,6 +48,27 @@ func StartTelegramBot() {
 		}
 		text := update.Message.Text
 		chatID := update.Message.Chat.ID
+		chatUserName := update.Message.Chat.UserName
+
+		tgUserNameStr := os.Getenv("tg_whitelist")
+
+		tgUserNames := strings.Split(tgUserNameStr, ",")
+
+		if len(tgUserNames) > 0 {
+			found := false
+			for _, name := range tgUserNames {
+				if name == chatUserName {
+					found = true
+					break
+				}
+			}
+
+			if !found {
+				log.Error("用户设置了私人私用，白名单以外的人不生效: ", chatUserName)
+				return
+			}
+		}
+
 		responseMsg := telegram.Handle(text)
 		if responseMsg == nil {
 			continue

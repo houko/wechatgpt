@@ -44,9 +44,9 @@ go run main.go
 ```
 
 ## `Docker` 方式运行`wechatgpt`
+`建议单独跑多个docker以免互相影响`
 
 同时启动微信和telegram，微信登陆的地址请查看运行日志
-
 ```
 # apple silicon
 docker run -d \
@@ -103,6 +103,30 @@ docker run -d \
 xiaomoinfo/wechatgpt-amd64:latest
 
 ```
+
+
+如果运行`telegram`智能机器人时只希望指定的人使用，白名单以外的人发消息机器人不会回复
+
+```
+# apple silicon
+docker run -d \ 
+--name wechatgpt \ 
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+-e tg_whitelist="username1,username2" \
+xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+-e tg_whitelist="username1,username2" \
+xiaomoinfo/wechatgpt-amd64:latest
+
+```
+
+
 
 <img src="screenshots/docker部署.png" alt="drawing" style="width:450px;"/>
 
