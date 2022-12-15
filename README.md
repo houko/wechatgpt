@@ -127,6 +127,28 @@ xiaomoinfo/wechatgpt-amd64:latest
 ```
 
 
+如果运行`telegram`智能机器人时希望在群里回复别人消息，可以指定一个关键字触发
+
+```
+# apple silicon
+docker run -d \ 
+--name wechatgpt \ 
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+-e tg_keyword="小莫" \
+xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e telegram="你的telegram token" \
+-e tg_keyword="小莫" \
+xiaomoinfo/wechatgpt-amd64:latest
+
+```
+
+
 
 <img src="screenshots/docker部署.png" alt="drawing" style="width:450px;"/>
 
