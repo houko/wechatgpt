@@ -12,10 +12,8 @@ tasks:
 
   release:
     cmds:
-      - docker rmi xiaomoinfo/wechatgpt-amd64:latest
       - docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:latest .
       - docker push xiaomoinfo/wechatgpt-amd64:latest
-      - docker rmi xiaomoinfo/wechatgpt:latest
       - docker build -t xiaomoinfo/wechatgpt:latest .
       - docker push xiaomoinfo/wechatgpt:latest
 
