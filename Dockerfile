@@ -1,6 +1,6 @@
 FROM golang:1.19-alpine
 
-ENV apiKey=""
+ENV api_key=""
 
 RUN export GOPRIVATE=github.com/houko/wechatgpt
 

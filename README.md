@@ -25,7 +25,8 @@ cp config/config.yaml.example local/config.yaml
 
 ## 修改你的token
 
-打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号, 生成一个apiKey并把apiKey放到`local/config.yaml`
+打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号,
+生成一个api_key并把api_key放到`local/config.yaml`
 的token下，请看如下示例：
 
 ```
@@ -43,7 +44,7 @@ chatgpt:
 
 | 变量名            | 值                 | 作用               |
 |----------------|-------------------|------------------|
-| api_key        | "chatgpt的apiKey"  | 必填项              |
+| api_key        | "chatgpt的api_key" | 必填项              |
 | wechat         | "true" 或缺省        | 如果为true就会启动微信机器人 |
 | wechat_keyword | "关键字"或缺省          | 如果缺省则发任何消息机器都会回复 |
 | telegram       | telegram的token或缺省 | 如果要启动tg机器人需要填写   |
@@ -62,20 +63,20 @@ go run main.go
 docker run -d \
 --name wechatgpt \
 -e wechat="true" \
--e wechatKeyword="微信触发关键字" \
+-e wechat_keyword="微信触发关键字" \
 xiaomoinfo/wechatgpt:latest
 
 ```
 
 运行微信智能机器人不需要任何触发关键字请运行下面这段代码，适合微信小号专业做机器人用，微信登陆的地址请查看运行日志`docker logs <containerId>`   
-`警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`   
+`警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`
 
 ```
 
 # linux amd64
 docker run -d \
 --name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
+-e api_key="你的chatgpt api_key" \
 -e wechat="true" \
 xiaomoinfo/wechatgpt:latest
 
@@ -87,7 +88,7 @@ xiaomoinfo/wechatgpt:latest
 # linux amd64
 docker run -d \
 --name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
+-e api_key="你的chatgpt api_key" \
 -e telegram="你的telegram token" \
 xiaomoinfo/wechatgpt:latest
 
@@ -99,7 +100,7 @@ xiaomoinfo/wechatgpt:latest
 # linux amd64
 docker run -d \
 --name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
+-e api_key="你的chatgpt api_key" \
 -e telegram="你的telegram token" \
 -e tg_whitelist="username1,username2" \
 xiaomoinfo/wechatgpt:latest
@@ -112,7 +113,7 @@ xiaomoinfo/wechatgpt:latest
 # linux amd64
 docker run -d \
 --name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
+-e api_key="你的chatgpt api_key" \
 -e telegram="你的telegram token" \
 -e tg_keyword="小莫" \
 xiaomoinfo/wechatgpt:latest
