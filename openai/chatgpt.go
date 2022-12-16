@@ -58,14 +58,7 @@ type ChatGPTRequestBody struct {
 func Completions(msg string) (*string, error) {
 	apiKey := config.GetOpenAiApiKey()
 	if apiKey == nil {
-		appConfig := config.GetConfig()
-		if appConfig == nil {
-			return nil, errors.New("config not found")
-		}
-		apiKey = &appConfig.ChatGpt.Token
-		log.Info("找到本地配置文件中的chatgpt apiKey:", apiKey)
-	} else {
-		log.Info("找到环境变量中的chatgpt apiKey:", apiKey)
+		return nil, errors.New("未配置apiKey")
 	}
 
 	requestBody := ChatGPTRequestBody{

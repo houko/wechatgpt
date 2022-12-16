@@ -14,21 +14,12 @@ import (
 func StartTelegramBot() {
 	telegramKey := config.GetTelegram()
 	if telegramKey == nil {
-		getConfig := config.GetConfig()
-		if getConfig == nil {
-			return
-		}
-		botConfig := getConfig.ChatGpt
-		if botConfig.Telegram == nil {
-			return
-		}
-		telegramKey = botConfig.Telegram
-		log.Info("读取本地本置文件中的telegram token:", telegramKey)
-	} else {
-		log.Info("找到环境变量: telegram token:", telegramKey)
+		log.Info("未找到tg token,不启动tg tot")
+		return
 	}
 	bot, err := tgbotapi.NewBotAPI(*telegramKey)
 	if err != nil {
+		log.Error("tg bot 启动失败：", err.Error())
 		return
 	}
 

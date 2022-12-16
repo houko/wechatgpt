@@ -19,7 +19,7 @@ tasks:
 
   version:
     cmds:
-      - docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:2.8.0 .
-      - docker push xiaomoinfo/wechatgpt-amd64:2.8.0
-      - docker build -t xiaomoinfo/wechatgpt:2.8.0 .
-      - docker push xiaomoinfo/wechatgpt:2.8.0
+      - docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:2.9.2 .
+      - docker push xiaomoinfo/wechatgpt-amd64:2.9.2
+      - docker build -t xiaomoinfo/wechatgpt:2.9.2 .
+      - docker push xiaomoinfo/wechatgpt:2.9.2

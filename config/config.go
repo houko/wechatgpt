@@ -12,9 +12,12 @@ type Config struct {
 }
 
 type ChatGptConfig struct {
-	Wechat   *string `json:"wechat,omitempty"`
-	Token    string  `json:"token,omitempty" json:"token,omitempty"`
-	Telegram *string `json:"telegram"`
+	Token         string  `json:"token,omitempty" json:"token,omitempty"`
+	Wechat        *string `json:"wechat,omitempty"`
+	WechatKeyword *string `json:"wechat_keyword"`
+	Telegram      *string `json:"telegram"`
+	TgWhitelist   *string `json:"tg_whitelist"`
+	TgKeyword     *string `json:"tg_keyword"`
 }
 
 func LoadConfig() error {
@@ -36,28 +39,53 @@ func GetConfig() *Config {
 	return config
 }
 
-func GetWechatEnv() *string {
-	return getEnv("wechat")
+func GetWechat() *string {
+	wechat := getEnv("wechat")
+	if wechat == nil {
+		wechat = config.ChatGpt.Wechat
+	}
+	return wechat
 }
 
-func GetWechatKeywordEnv() *string {
-	return getEnv("wechat_keyword")
+func GetWechatKeyword() *string {
+	keyword := getEnv("wechat_keyword")
+	if keyword == nil {
+		keyword = config.ChatGpt.WechatKeyword
+	}
+	return keyword
 }
 
 func GetTelegram() *string {
-	return getEnv("telegram")
+	tg := getEnv("telegram")
+
+	if tg == nil {
+		tg = config.ChatGpt.Telegram
+	}
+	return tg
 }
 
 func GetTelegramKeyword() *string {
-	return getEnv("tg_keyword")
+	tgKeyword := getEnv("tg_keyword")
+	if tgKeyword == nil {
+		tgKeyword = config.ChatGpt.TgKeyword
+	}
+	return tgKeyword
 }
 
 func GetTelegramWhitelist() *string {
-	return getEnv("tg_whitelist")
+	tgWhitelist := getEnv("tg_whitelist")
+	if tgWhitelist == nil {
+		tgWhitelist = config.ChatGpt.TgWhitelist
+	}
+	return tgWhitelist
 }
 
 func GetOpenAiApiKey() *string {
-	return getEnv("api_key")
+	apiKey := getEnv("api_key")
+	if apiKey == nil {
+		apiKey = &config.ChatGpt.Token
+	}
+	return apiKey
 }
 
 func getEnv(key string) *string {
