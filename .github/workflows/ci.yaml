@@ -15,6 +15,7 @@ jobs:
       - name: Push amd64 image
         run: |
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker images
           docker push xiaomoinfo/wechatgpt-amd64:latest
       - name: Build apple silicon image
         run: |
@@ -22,5 +23,6 @@ jobs:
       - name: Push apple silicon image
         run: |
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker images
           docker push xiaomoinfo/wechatgpt:latest
     
