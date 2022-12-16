@@ -59,20 +59,11 @@ go run main.go
 运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志`docker logs <containerId>`
 
 ```
-# apple silicon 
 docker run -d \
 --name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
 -e wechat="true" \
 -e wechatKeyword="微信触发关键字" \
 xiaomoinfo/wechatgpt:latest
-
-# linux amd64
-docker run -d \
---name wechatgpt \
--e wechat="true" \
--e wechatKeyword="微信触发关键字" \
-xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
@@ -80,80 +71,51 @@ xiaomoinfo/wechatgpt-amd64:latest
 `警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`   
 
 ```
-# apple silicon 
-docker run -d \
---name wechatgpt \
--e apiKey="你的chatgpt apiKey" \
--e wechat="true" \
-xiaomoinfo/wechatgpt:latest
 
 # linux amd64
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
 -e wechat="true" \
-xiaomoinfo/wechatgpt-amd64:latest
+xiaomoinfo/wechatgpt:latest
 
 ```
 
 运行`telegram`智能机器人的话运行下面这段代码
 
 ```
-# apple silicon
-docker run -d \ 
---name wechatgpt \ 
--e apiKey="你的chatgpt apiKey" \
--e telegram="你的telegram token" \
-xiaomoinfo/wechatgpt:latest
-
 # linux amd64
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
 -e telegram="你的telegram token" \
-xiaomoinfo/wechatgpt-amd64:latest
+xiaomoinfo/wechatgpt:latest
 
 ```
 
 如果运行`telegram`智能机器人时只希望指定的人使用，白名单以外的人发消息机器人不会回复
 
 ```
-# apple silicon
-docker run -d \ 
---name wechatgpt \ 
--e apiKey="你的chatgpt apiKey" \
--e telegram="你的telegram token" \
--e tg_whitelist="username1,username2" \
-xiaomoinfo/wechatgpt:latest
-
 # linux amd64
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
 -e telegram="你的telegram token" \
 -e tg_whitelist="username1,username2" \
-xiaomoinfo/wechatgpt-amd64:latest
+xiaomoinfo/wechatgpt:latest
 
 ```
 
 如果运行`telegram`智能机器人时希望在群里回复别人消息，可以指定一个关键字触发
 
 ```
-# apple silicon
-docker run -d \ 
---name wechatgpt \ 
--e apiKey="你的chatgpt apiKey" \
--e telegram="你的telegram token" \
--e tg_keyword="小莫" \
-xiaomoinfo/wechatgpt:latest
-
 # linux amd64
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
 -e telegram="你的telegram token" \
 -e tg_keyword="小莫" \
-xiaomoinfo/wechatgpt-amd64:latest
+xiaomoinfo/wechatgpt:latest
 
 ```
 
