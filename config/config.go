@@ -103,7 +103,12 @@ func GetOpenAiApiKey() *string {
 }
 
 func getEnv(key string) *string {
-	value := os.Getenv(strings.ToUpper(key))
+	value := os.Getenv(key)
+
+	if len(value) == 0 {
+		value = os.Getenv(strings.ToUpper(key))
+	}
+
 	if config == nil {
 		return nil
 	}
