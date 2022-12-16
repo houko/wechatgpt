@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#      - name: Build amd64 image
-#        run: |
-#          docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:latest .
-#      - name: Push amd64 image
-#        run: |
-#          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-#          docker images
-#          docker push xiaomoinfo/wechatgpt-amd64:latest
+      - name: Build amd64 image
+        run: |
+          docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:latest .
+      - name: Push amd64 image
+        run: |
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker images
+          docker push xiaomoinfo/wechatgpt-amd64:latest
       - name: Build apple silicon image
         run: |
           docker build -t xiaomoinfo/wechatgpt:latest .
