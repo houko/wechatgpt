@@ -1,9 +1,0 @@
-image: wechatgpt
-architectures:
-  - amd64
-  - arm64
-  - arm
-tags:
-  - latest
-  - amd64-latest
-  - arm64-latest
