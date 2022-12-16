@@ -46,4 +46,3 @@ jobs:
           push: true
           manifest: ./manifest.yml
           platforms: linux/amd64,linux/arm64
-          tags: xiaomoinfo/wechatgpt-amd64:latest
