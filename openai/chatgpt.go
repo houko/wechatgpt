@@ -10,7 +10,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -57,13 +56,13 @@ type ChatGPTRequestBody struct {
 //
 // Completions sendMsg
 func Completions(msg string) (*string, error) {
-	apiKey := os.Getenv("apiKey")
-	if len(apiKey) == 0 {
+	apiKey := config.GetOpenAiApiKey()
+	if apiKey == nil {
 		appConfig := config.GetConfig()
 		if appConfig == nil {
 			return nil, errors.New("config not found")
 		}
-		apiKey = appConfig.ChatGpt.Token
+		apiKey = &appConfig.ChatGpt.Token
 		log.Info("找到本地配置文件中的chatgpt apiKey:", apiKey)
 	} else {
 		log.Info("找到环境变量中的chatgpt apiKey:", apiKey)
@@ -92,7 +91,7 @@ func Completions(msg string) (*string, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", apiKey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", *apiKey))
 	client := &http.Client{}
 	response, err := client.Do(req)
 	if err != nil {

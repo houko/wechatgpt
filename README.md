@@ -39,53 +39,64 @@ chatgpt:
 
 ## 运行App
 
+### 环境变量
+
+| 变量名            | 值                 | 作用               |
+|----------------|-------------------|------------------|
+| api_key        | "chatgpt的apiKey"  | 必填项              |
+| wechat         | "true" 或缺省        | 如果为true就会启动微信机器人 |
+| wechat_keyword | "关键字"或缺省          | 如果缺省则发任何消息机器都会回复 |
+| telegram       | telegram的token或缺省 | 如果要启动tg机器人需要填写   |
+| tg_keyword     | telegram触发关键字或缺省  | 如果需要关键字触发就填写     |
+| tg_whitelist   | telegram的触发白名单    | 白名单以外的用户名发消息不会触发 |
+
 ```
 go run main.go
 ```
 
 ## `Docker` 方式运行`wechatgpt`
-`建议单独跑多个docker以免互相影响`
 
-同时启动微信和telegram，微信登陆的地址请查看运行日志
-```
-# apple silicon
-docker run -d \
---name="wechatgpt" \
--e apiKey="你的chatgpt apiKey" \
--e wechat="微信触发关键字" \
--e telegram="你的telegram token"  \
-xiaomoinfo/wechatgpt:latest
-
-# linux amd64
-docker run -d \
---name="wechatgpt" \
--e apiKey="你的chatgpt apiKey" \
--e wechat="微信触发关键字" \
--e telegram="你的telegram token"  \
-xiaomoinfo/wechatgpt-amd64:latest
-
-```
-
-如果只想运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志
+运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志`docker logs <containerId>`
 
 ```
 # apple silicon 
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
--e wechat="微信触发关键字" \
+-e wechat="true" \
+-e wechatKeyword="微信触发关键字" \
+xiaomoinfo/wechatgpt:latest
+
+# linux amd64
+docker run -d \
+--name wechatgpt \
+-e wechat="true" \
+-e wechatKeyword="微信触发关键字" \
+xiaomoinfo/wechatgpt-amd64:latest
+
+```
+
+运行微信智能机器人不需要任何触发关键字请运行下面这段代码，适合微信小号专业做机器人用，微信登陆的地址请查看运行日志`docker logs <containerId>`   
+`警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`   
+
+```
+# apple silicon 
+docker run -d \
+--name wechatgpt \
+-e apiKey="你的chatgpt apiKey" \
+-e wechat="true" \
 xiaomoinfo/wechatgpt:latest
 
 # linux amd64
 docker run -d \
 --name wechatgpt \
 -e apiKey="你的chatgpt apiKey" \
--e wechat="微信触发关键字" \
+-e wechat="true" \
 xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
-如果只想运行`telegram`智能机器人的话运行下面这段代码
+运行`telegram`智能机器人的话运行下面这段代码
 
 ```
 # apple silicon
@@ -103,7 +114,6 @@ docker run -d \
 xiaomoinfo/wechatgpt-amd64:latest
 
 ```
-
 
 如果运行`telegram`智能机器人时只希望指定的人使用，白名单以外的人发消息机器人不会回复
 
@@ -126,7 +136,6 @@ xiaomoinfo/wechatgpt-amd64:latest
 
 ```
 
-
 如果运行`telegram`智能机器人时希望在群里回复别人消息，可以指定一个关键字触发
 
 ```
@@ -147,8 +156,6 @@ docker run -d \
 xiaomoinfo/wechatgpt-amd64:latest
 
 ```
-
-
 
 <img src="screenshots/docker部署.png" alt="drawing" style="width:450px;"/>
 

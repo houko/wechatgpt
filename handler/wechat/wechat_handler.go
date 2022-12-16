@@ -7,7 +7,6 @@ import (
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/openai"
 	"github.com/wechatgpt/wechatbot/utils"
-	"os"
 	"strings"
 )
 
@@ -33,25 +32,26 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	group := openwechat.Group{User: sender}
 	log.Printf("Received Group %v Text Msg : %v", group.NickName, msg.Content)
 
-	wechat := os.Getenv("wechat")
-	if len(wechat) == 0 {
+	wechat := config.GetWechatKeywordEnv()
+	if wechat == nil {
 		appConfig := config.GetConfig()
 		if appConfig.ChatGpt.Wechat != nil {
-			wechat = *appConfig.ChatGpt.Wechat
-		} else {
-			wechat = "chatgpt"
+			wechat = appConfig.ChatGpt.Wechat
 		}
 	}
+	requestText := msg.Content
+	if wechat != nil {
+		content, key := utils.ContainsI(msg.Content, *wechat)
+		if len(key) == 0 {
+			return nil
+		}
+		splitItems := strings.Split(content, key)
+		if len(splitItems) < 2 {
+			return nil
+		}
+		requestText = strings.TrimSpace(splitItems[1])
+	}
 
-	content, key := utils.ContainsI(msg.Content, wechat)
-	if len(key) == 0 {
-		return nil
-	}
-	splitItems := strings.Split(content, key)
-	if len(splitItems) < 2 {
-		return nil
-	}
-	requestText := strings.TrimSpace(splitItems[1])
 	log.Println("问题：", requestText)
 	reply, err := openai.Completions(requestText)
 	if err != nil {
