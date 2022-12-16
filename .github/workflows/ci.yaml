@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build amd64 image
         run: |
-          docker build --platform linux/amd64 -t xiaomoinfo/wechatgpt-amd64:latest .
+          docker build --platform linux/amd64 -t registry.hub.docker.com/xiaomoinfo/wechatgpt-amd64:latest .
       - name: Push amd64 image
         run: |
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
@@ -19,7 +19,7 @@ jobs:
           docker push registry.hub.docker.com/xiaomoinfo/wechatgpt-amd64:latest
       - name: Build apple silicon image
         run: |
-          docker build -t xiaomoinfo/wechatgpt:latest .
+          docker build -t registry.hub.docker.com/xiaomoinfo/wechatgpt:latest .
       - name: Push apple silicon image
         run: |
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
