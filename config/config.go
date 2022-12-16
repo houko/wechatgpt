@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/spf13/viper"
 	"os"
 	"strings"
@@ -38,6 +39,10 @@ func LoadConfig() error {
 
 func GetWechat() *string {
 	wechat := getEnv("wechat")
+
+	if wechat != nil {
+		return wechat
+	}
 	if config == nil {
 		return nil
 	}
@@ -49,6 +54,10 @@ func GetWechat() *string {
 
 func GetWechatKeyword() *string {
 	keyword := getEnv("wechat_keyword")
+
+	if keyword != nil {
+		return keyword
+	}
 	if config == nil {
 		return nil
 	}
@@ -60,6 +69,10 @@ func GetWechatKeyword() *string {
 
 func GetTelegram() *string {
 	tg := getEnv("telegram")
+	fmt.Println(tg)
+	if tg != nil {
+		return tg
+	}
 	if config == nil {
 		return nil
 	}
@@ -71,6 +84,10 @@ func GetTelegram() *string {
 
 func GetTelegramKeyword() *string {
 	tgKeyword := getEnv("tg_keyword")
+
+	if tgKeyword != nil {
+		return tgKeyword
+	}
 	if config == nil {
 		return nil
 	}
@@ -82,6 +99,10 @@ func GetTelegramKeyword() *string {
 
 func GetTelegramWhitelist() *string {
 	tgWhitelist := getEnv("tg_whitelist")
+
+	if tgWhitelist != nil {
+		return tgWhitelist
+	}
 	if config == nil {
 		return nil
 	}
@@ -93,6 +114,11 @@ func GetTelegramWhitelist() *string {
 
 func GetOpenAiApiKey() *string {
 	apiKey := getEnv("api_key")
+
+	if apiKey != nil {
+		return apiKey
+	}
+
 	if config == nil {
 		return nil
 	}
@@ -104,9 +130,12 @@ func GetOpenAiApiKey() *string {
 
 func getEnv(key string) *string {
 	value := os.Getenv(key)
-
 	if len(value) == 0 {
 		value = os.Getenv(strings.ToUpper(key))
+	}
+
+	if len(value) > 0 {
+		return &value
 	}
 
 	if config == nil {

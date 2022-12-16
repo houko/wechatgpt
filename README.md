@@ -72,8 +72,6 @@ xiaomoinfo/wechatgpt:latest
 `警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`
 
 ```
-
-# linux amd64
 docker run -d \
 --name wechatgpt \
 -e api_key="你的chatgpt api_key" \
@@ -85,7 +83,6 @@ xiaomoinfo/wechatgpt:latest
 运行`telegram`智能机器人的话运行下面这段代码
 
 ```
-# linux amd64
 docker run -d \
 --name wechatgpt \
 -e api_key="你的chatgpt api_key" \
@@ -97,7 +94,6 @@ xiaomoinfo/wechatgpt:latest
 如果运行`telegram`智能机器人时只希望指定的人使用，白名单以外的人发消息机器人不会回复
 
 ```
-# linux amd64
 docker run -d \
 --name wechatgpt \
 -e api_key="你的chatgpt api_key" \
@@ -110,7 +106,6 @@ xiaomoinfo/wechatgpt:latest
 如果运行`telegram`智能机器人时希望在群里回复别人消息，可以指定一个关键字触发
 
 ```
-# linux amd64
 docker run -d \
 --name wechatgpt \
 -e api_key="你的chatgpt api_key" \
