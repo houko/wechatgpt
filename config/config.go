@@ -35,12 +35,11 @@ func LoadConfig() error {
 	return nil
 }
 
-func GetConfig() *Config {
-	return config
-}
-
 func GetWechat() *string {
 	wechat := getEnv("wechat")
+	if config == nil {
+		return nil
+	}
 	if wechat == nil {
 		wechat = config.ChatGpt.Wechat
 	}
@@ -49,6 +48,9 @@ func GetWechat() *string {
 
 func GetWechatKeyword() *string {
 	keyword := getEnv("wechat_keyword")
+	if config == nil {
+		return nil
+	}
 	if keyword == nil {
 		keyword = config.ChatGpt.WechatKeyword
 	}
@@ -57,7 +59,9 @@ func GetWechatKeyword() *string {
 
 func GetTelegram() *string {
 	tg := getEnv("telegram")
-
+	if config == nil {
+		return nil
+	}
 	if tg == nil {
 		tg = config.ChatGpt.Telegram
 	}
@@ -66,6 +70,9 @@ func GetTelegram() *string {
 
 func GetTelegramKeyword() *string {
 	tgKeyword := getEnv("tg_keyword")
+	if config == nil {
+		return nil
+	}
 	if tgKeyword == nil {
 		tgKeyword = config.ChatGpt.TgKeyword
 	}
@@ -74,6 +81,9 @@ func GetTelegramKeyword() *string {
 
 func GetTelegramWhitelist() *string {
 	tgWhitelist := getEnv("tg_whitelist")
+	if config == nil {
+		return nil
+	}
 	if tgWhitelist == nil {
 		tgWhitelist = config.ChatGpt.TgWhitelist
 	}
@@ -82,6 +92,9 @@ func GetTelegramWhitelist() *string {
 
 func GetOpenAiApiKey() *string {
 	apiKey := getEnv("api_key")
+	if config == nil {
+		return nil
+	}
 	if apiKey == nil {
 		apiKey = &config.ChatGpt.Token
 	}
@@ -90,6 +103,9 @@ func GetOpenAiApiKey() *string {
 
 func getEnv(key string) *string {
 	value := os.Getenv(key)
+	if config == nil {
+		return nil
+	}
 	if len(value) > 0 {
 		return &value
 	}
