@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/spf13/viper"
 	"os"
+	"strings"
 )
 
 var config *Config
@@ -102,7 +103,7 @@ func GetOpenAiApiKey() *string {
 }
 
 func getEnv(key string) *string {
-	value := os.Getenv(key)
+	value := os.Getenv(strings.ToUpper(key))
 	if config == nil {
 		return nil
 	}
