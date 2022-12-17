@@ -3,18 +3,10 @@ package bootstrap
 import (
 	"github.com/eatmoreapple/openwechat"
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/handler/wechat"
-	"os"
-	"strings"
 )
 
 func StartWebChat() {
-	keyword := getKeyword()
-	if len(keyword) == 0 {
-		log.Info("未配置微信关键字，不启动微信")
-		return
-	}
 	bot := openwechat.DefaultBot(openwechat.Desktop)
 	bot.MessageHandler = wechat.Handler
 	bot.UUIDCallback = openwechat.PrintlnQrcodeUrl
@@ -49,18 +41,4 @@ func StartWebChat() {
 		log.Fatal(err)
 		return
 	}
-}
-
-func getKeyword() string {
-	keyword := os.Getenv("wechat")
-	if len(strings.Trim(keyword, " ")) == 0 {
-		gptConfig := config.GetConfig()
-		if gptConfig != nil {
-			if gptConfig.ChatGpt.Wechat != nil {
-				keyword = *gptConfig.ChatGpt.Wechat
-			}
-		}
-	}
-
-	return keyword
 }
