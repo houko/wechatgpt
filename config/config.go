@@ -1,10 +1,10 @@
 package config
 
 import (
-	"fmt"
-	"github.com/spf13/viper"
 	"os"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
 var config *Config
@@ -69,7 +69,6 @@ func GetWechatKeyword() *string {
 
 func GetTelegram() *string {
 	tg := getEnv("telegram")
-	fmt.Println(tg)
 	if tg != nil {
 		return tg
 	}
