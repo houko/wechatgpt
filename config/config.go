@@ -141,8 +141,11 @@ func getEnv(key string) *string {
 	if config == nil {
 		return nil
 	}
+
 	if len(value) > 0 {
 		return &value
+	} else if config.ChatGpt.WechatKeyword != nil {
+		value = *config.ChatGpt.WechatKeyword
 	}
 	return nil
 }
