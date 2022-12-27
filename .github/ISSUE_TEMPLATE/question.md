@@ -1,6 +1,6 @@
 ---
 name: 请求帮助
-about: 如果你遇到了问题请先翻readme的`Q&A`部分和己关闭的`issue`。
+about: 如果你遇到了问题请先翻readme的Q&A部分和己关闭的issue。
 title: ''
 labels: ''
 assignees: ''
