@@ -1,6 +1,6 @@
 ---
 name: 请求帮助
-about: Create a report to help us improve
+about: 如果你遇到了问题请先翻readme的`Q&A`部分和己关闭的`issue`。
 title: ''
 labels: ''
 assignees: ''

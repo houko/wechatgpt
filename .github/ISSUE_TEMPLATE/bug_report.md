@@ -1,6 +1,6 @@
 ---
 name: 报告问题
-about: Create a report to help us improve
+about: 如果你不确定这是一个bug，请选择【请求帮助】
 title: ''
 labels: ''
 assignees: ''

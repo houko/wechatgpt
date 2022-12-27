@@ -1,6 +1,6 @@
 ---
 name: 想要新功能
-about: Suggest an idea for this project
+about: 你有什么想要添加的新功能？
 title: ''
 labels: ''
 assignees: ''
