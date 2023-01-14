@@ -4,6 +4,7 @@ import (
 	"github.com/eatmoreapple/openwechat"
 	log "github.com/sirupsen/logrus"
 	"github.com/wechatgpt/wechatbot/handler/wechat"
+	"os"
 )
 
 func StartWebChat() {
@@ -14,8 +15,13 @@ func StartWebChat() {
 	reloadStorage := openwechat.NewJsonFileHotReloadStorage("token.json")
 	err := bot.HotLogin(reloadStorage)
 	if err != nil {
-		if err = bot.Login(); err != nil {
-			log.Fatal(err)
+		err := os.Remove("token.json")
+		if err != nil {
+			return
+		}
+		reloadStorage = openwechat.NewJsonFileHotReloadStorage("token.json")
+		err = bot.HotLogin(reloadStorage)
+		if err != nil {
 			return
 		}
 	}
