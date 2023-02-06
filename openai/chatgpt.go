@@ -55,17 +55,22 @@ type ChatGPTRequestBody struct {
 //	});
 //
 // Completions sendMsg
-func Completions(msg string) (*string, error) {
+func Completions(msg string, model_opt ...string) (*string, error) {
+	model := "text-davinci-003"
+	if len(model_opt) > 0 {
+		model = model_opt[0]
+	}
 	apiKey := config.GetOpenAiApiKey()
 	if apiKey == nil {
 		return nil, errors.New("未配置apiKey")
 	}
 
+	maxlen := config.GetMaxLen()
 	requestBody := ChatGPTRequestBody{
-		Model:            "text-davinci-003",
+		Model:            model,
 		Prompt:           msg,
-		MaxTokens:        4000,
-		Temperature:      0.7,
+		MaxTokens:        *maxlen - len(msg),
+		Temperature:      1,
 		TopP:             1,
 		FrequencyPenalty: 0,
 		PresencePenalty:  0,

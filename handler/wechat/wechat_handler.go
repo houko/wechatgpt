@@ -33,6 +33,7 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	log.Printf("Received Group %v Text Msg : %v", group.NickName, msg.Content)
 
 	wechat := config.GetWechatKeyword()
+	model := *config.GetModelType()
 	requestText := msg.Content
 	if wechat != nil {
 		content, key := utils.ContainsI(requestText, *wechat)
@@ -44,10 +45,16 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 			return nil
 		}
 		requestText = strings.TrimSpace(splitItems[1])
+		content, key = utils.ContainsI(requestText, "codingMode")
+		if len(key) != 0 {
+			splitItems := strings.Split(content, key)
+			requestText = strings.TrimSpace(splitItems[1])
+			model = "code-davinci-002"
+		}
 	}
 
 	log.Println("问题：", requestText)
-	reply, err := openai.Completions(requestText)
+	reply, err := openai.Completions(requestText, model)
 	if err != nil {
 		log.Println(err)
 		if reply != nil {

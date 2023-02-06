@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"viper"
+	"github.com/spf13/viper"
 	"strconv"
 )
 
