@@ -2,24 +2,25 @@ package config
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
 var config *Config
 
 type Config struct {
-	ChatGpt ChatGptConfig `json:"chatgpt"`
+	ChatGpt ChatGptConfig `json:"chatgpt" mapstructure:"chatgpt" yaml:"chatgpt"`
 }
 
 type ChatGptConfig struct {
-	Token         string  `json:"token,omitempty" json:"token,omitempty"`
-	Wechat        *string `json:"wechat,omitempty"`
-	WechatKeyword *string `json:"wechat_keyword"`
-	Telegram      *string `json:"telegram"`
-	TgWhitelist   *string `json:"tg_whitelist"`
-	TgKeyword     *string `json:"tg_keyword"`
+	Token         string  `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
+	Wechat        *string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
+	WechatKeyword *string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
+	Telegram      *string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
+	TgWhitelist   *string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
+	TgKeyword     *string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
 }
 
 func LoadConfig() error {
