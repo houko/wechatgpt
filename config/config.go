@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
-	"github.com/spf13/viper"
+	"viper"
+	"strconv"
 )
 
 var config *Config
@@ -18,6 +18,8 @@ type ChatGptConfig struct {
 	Token         string  `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
 	Wechat        *string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
 	WechatKeyword *string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
+	Model         *string `json:"model,omitempty    mapstructure:"model"            yaml:"model"`
+	MaxLen        *int `json:"maxlen,omitempty     mapstructure:"maxlen"           yaml:"maxlen"`
 	Telegram      *string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
 	TgWhitelist   *string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
 	TgKeyword     *string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
@@ -66,6 +68,37 @@ func GetWechatKeyword() *string {
 		keyword = config.ChatGpt.WechatKeyword
 	}
 	return keyword
+}
+
+func GetModelType() *string {
+	keyword := getEnv("model")
+
+	if keyword != nil {
+		return keyword
+	}
+	if config == nil {
+		return nil
+	}
+	if keyword == nil {
+		keyword = config.ChatGpt.Model
+	}
+	return keyword
+}
+
+func GetMaxLen() *int {
+	keyword := getEnv("maxlen")
+
+	if keyword != nil {
+		maxlen, _ := strconv.Atoi(*keyword)
+		return &maxlen
+	}
+	if config == nil {
+		return nil
+	}
+	if keyword == nil {
+		return config.ChatGpt.MaxLen
+	}
+	return nil
 }
 
 func GetTelegram() *string {

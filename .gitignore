@@ -1,3 +1,4 @@
 .idea
 local/config.yaml
 token.json
+.vscode
