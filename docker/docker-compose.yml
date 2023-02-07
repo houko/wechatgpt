@@ -1,0 +1,43 @@
+# 文件适合本地测试使用
+# 按需:
+# 1. 更改ports端口
+# 2. 如果需要检测intermediate数据, 则comment掉tmpfs, 启用volume
+version: '2.4'
+services:
+  wechatgpt:
+    image: wechatgpt_sjy_debug:latest
+    # command: tail -F anything
+    # build:
+    #   dockerfile: docker/test/Dockerfile
+    #   context: ..
+    environment:
+      token: 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
+      wechat: "true"
+      wechatkeyword: 挠挠
+      model: text-davinci-003
+      maxlen: 4050
+    command: ./server
+    depends_on:
+      - map-redis
+      # - postgres
+    tmpfs:
+      - /tmp
+    networks:
+      - map
+    # volumes:
+    #   - ..:/map
+
+  map-redis:
+    # db 0
+    image: redis:5.0.4-alpine
+    ports:
+      - 6379
+    # setting the log level so we can directly see `print` result in lua
+    # docker-compose logs -f --tail 20 redis
+    command: redis-server --loglevel verbose --save "" --appendonly no --databases 1
+    networks:
+      - map
+
+networks:
+  map:
+    driver: bridge

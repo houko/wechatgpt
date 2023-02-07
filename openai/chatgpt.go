@@ -55,10 +55,10 @@ type ChatGPTRequestBody struct {
 //	});
 //
 // Completions sendMsg
-func Completions(msg string, model_opt ...string) (*string, error) {
+func Completions(msg string, model_opt string) (*string, error) {
 	model := "text-davinci-003"
-	if len(model_opt) > 0 {
-		model = model_opt[0]
+	if model_opt!= "" {
+		model = model_opt
 	}
 	apiKey := config.GetOpenAiApiKey()
 	if apiKey == nil {

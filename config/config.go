@@ -147,7 +147,7 @@ func GetTelegramWhitelist() *string {
 }
 
 func GetOpenAiApiKey() *string {
-	apiKey := getEnv("api_key")
+	apiKey := getEnv("token")
 
 	if apiKey != nil {
 		return apiKey

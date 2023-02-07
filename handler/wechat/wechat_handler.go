@@ -34,6 +34,7 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 
 	wechat := config.GetWechatKeyword()
 	model := *config.GetModelType()
+	log.Printf("current model %v", model)
 	requestText := msg.Content
 	if wechat != nil {
 		content, key := utils.ContainsI(requestText, *wechat)
