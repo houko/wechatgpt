@@ -11,7 +11,7 @@ services:
     #   dockerfile: docker/test/Dockerfile
     #   context: ..
     environment:
-      token: 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
+      token: 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
       wechat: "true"
       wechatkeyword: 挠挠
       model: text-davinci-003
