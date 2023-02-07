@@ -62,6 +62,7 @@ go run main.go
 ```
 docker run -d \
 --name wechatgpt \
+-e api_key="你的chatgpt api_key" \
 -e wechat="true" \
 -e wechat_keyword="微信触发关键字" \
 xiaomoinfo/wechatgpt:latest
