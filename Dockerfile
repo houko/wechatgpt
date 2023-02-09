@@ -1,13 +1,20 @@
-FROM golang:1.19-alpine
+FROM golang:1.19-alpine as builder
 
-ENV api_key=""
+RUN apk --no-cache add git && export GOPRIVATE=github.com/houko/wechatgpt && \
+    export GOPROXY=https://goproxy.cn,direct
 
-RUN export GOPRIVATE=github.com/houko/wechatgpt
+COPY . /root/build
 
-WORKDIR /app
-
-COPY . /app
+WORKDIR /root/build
 
 RUN go mod download && go build -o server main.go
 
-CMD ./server
+FROM alpine:latest as prod
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+COPY --from=0 /root/build/server .
+
+CMD ["./server"]
