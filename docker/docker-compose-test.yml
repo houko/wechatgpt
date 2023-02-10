@@ -6,20 +6,15 @@ version: '2.4'
 services:
   wechatgpt:
     image: wechatgpt_sjy_debug:latest
-    # command: tail -F anything
-    # build:
-    #   dockerfile: docker/test/Dockerfile
-    #   context: ..
     environment:
-      token: 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
+      token: abcdefg
       wechat: "true"
-      wechatkeyword: 挠挠
+      wechat_keyword: 挠挠
       model: text-davinci-003
       maxlen: 4050
     command: ./server
     depends_on:
       - map-redis
-      # - postgres
     tmpfs:
       - /tmp
     networks:

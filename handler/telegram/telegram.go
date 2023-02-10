@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-func Handle(msg string) *string {
+func Handle(msg string, model string) *string {
 	requestText := strings.TrimSpace(msg)
-	reply, err := openai.Completions(requestText, "")
+	reply, err := openai.Completions(requestText, model)
 	if err != nil {
 		log.Println(err)
 	}

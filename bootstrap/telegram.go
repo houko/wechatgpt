@@ -61,6 +61,8 @@ func StartTelegramBot() {
 		}
 
 		tgKeyWord := config.GetTelegramKeyword()
+		model := *config.GetModelType()
+		log.Printf("current model %v", model)
 		var reply *string
 		// 如果设置了关键字就以关键字为准，没设置就所有消息都监听
 		if tgKeyWord != nil {
@@ -72,11 +74,17 @@ func StartTelegramBot() {
 			if len(splitItems) < 2 {
 				continue
 			}
+			content, key = utils.ContainsI(text, "codingMode")
+			if len(key) != 0 {
+				splitItems := strings.Split(content, key)
+				text = strings.TrimSpace(splitItems[1])
+				model = "code-davinci-002"
+			}
 			requestText := strings.TrimSpace(splitItems[1])
 			log.Println("问题：", requestText)
-			reply = telegram.Handle(requestText)
+			reply = telegram.Handle(requestText, model)
 		} else {
-			reply = telegram.Handle(text)
+			reply = telegram.Handle(text, "")
 		}
 		if reply == nil {
 			continue
