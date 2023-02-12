@@ -7,3 +7,4 @@ services:
       wechat: "true"
       wechat_keyword: 小莫
     command: ./server
+    restart: always
