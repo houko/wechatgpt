@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
@@ -70,7 +69,6 @@ func GetWechatKeyword() *string {
 
 func GetTelegram() *string {
 	tg := getEnv("telegram")
-	fmt.Println(tg)
 	if tg != nil {
 		return tg
 	}
