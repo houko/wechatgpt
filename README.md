@@ -27,7 +27,7 @@ cp config/config.yaml.example local/config.yaml
 
 打开 [openai](https://beta.openai.com/account/api-keys) 并注册一个账号,
 生成一个api_key并把api_key放到`local/config.yaml`
-的token下，请看如下示例：
+的token下，请看如下示例(说了是示例别试了,内容乱写的，也感谢@那些担心泄漏key的)：
 
 ```
 chatgpt:
