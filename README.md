@@ -160,12 +160,6 @@ INFO[0099] 3 <Friend:wloscar>
 
 ### 使用场景2
 
-别人在群里发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。
-
-<img src="screenshots/IMG_3845.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3847.png" alt="drawing" style="width:250px;"/>
-
-### 使用场景3
-
 自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。
 
 <img src="screenshots/IMG_3844.png" alt="drawing" style="width:250px;"/>
@@ -188,8 +182,8 @@ INFO[0099] 3 <Friend:wloscar>
 ```
 chatgpt:
   wechat: 小莫
-  token: sk-pKHZD1fLYqXDjjsdsdsdUvIODTT3ssjdfadsJC2gTuqqhTum
-  telegram: 5718911250:AAhR1pn52xcCFoM_GyI2g9BaX18S7WbYviQ 
+  token: sk-pKHZD1fLYyd56sadsdUvIODTT3ssjdfadsJC2gTuqqhTum
+  telegram: 5718911250:AAhRdbdfxzcCFoM_GyI2g9B18S7WbYviQ 
 ```
 
 `token`获取方式，请在telegram中添加好友`@botFather`并按提示操作
