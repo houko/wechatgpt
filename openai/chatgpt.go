@@ -115,6 +115,8 @@ func Completions(msg string) (*string, error) {
 			reply = v["text"].(string)
 			break
 		}
+	} else {
+		replay = v["error"]["message"].(string)
 	}
 	log.Printf("gpt response text: %s \n", reply)
 	result := strings.TrimSpace(reply)
