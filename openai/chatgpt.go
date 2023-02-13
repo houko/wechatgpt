@@ -23,6 +23,10 @@ type ChatGPTResponseBody struct {
 	Usage   map[string]interface{}   `json:"usage"`
 }
 
+type ChatGPTErrorBody struct {
+	Error   map[string]interface{}   `json:"error"`
+}
+
 // ChatGPTRequestBody 响应体
 type ChatGPTRequestBody struct {
 	Model            string  `json:"model"`
@@ -103,11 +107,15 @@ func Completions(msg string) (*string, error) {
 	}
 
 	gptResponseBody := &ChatGPTResponseBody{}
+	gptErrorBody := &ChatGPTErrorBodyP{}
 	log.Println(string(body))
 	err = json.Unmarshal(body, gptResponseBody)
 	if err != nil {
-		log.Println(err)
-		return nil, err
+		err = json.Unmarshal(body, gptErrorBody)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+		}
 	}
 	var reply string
 	if len(gptResponseBody.Choices) > 0 {
@@ -116,7 +124,7 @@ func Completions(msg string) (*string, error) {
 			break
 		}
 	} else {
-		replay = v["error"]["message"].(string)
+		reply = gptErrorBody.Error["message"].(string)
 	}
 	log.Printf("gpt response text: %s \n", reply)
 	result := strings.TrimSpace(reply)
