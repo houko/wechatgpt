@@ -126,7 +126,7 @@ func Completions(msg string) (*string, error) {
 	} else {
 		reply = gptErrorBody.Error["message"].(string)
 	}
-	log.Printf("gpt response text: %s \n", reply)
+	log.Printf("gpt response full text: %s \n", reply)
 	result := strings.TrimSpace(reply)
 	return &result, nil
 }
