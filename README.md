@@ -3,7 +3,7 @@
 如果觉得不错，请麻烦点个`Star`，非常感谢。（最新己经添加了docker部署的方式）
 
 <p>
-<img alt="Version" src="https://img.shields.io/badge/version-2.9.3-blue.svg?cacheSeconds=86400" />
+<img alt="Version" src="https://img.shields.io/badge/version-2.9.7-blue.svg?cacheSeconds=86400" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
   </a>
