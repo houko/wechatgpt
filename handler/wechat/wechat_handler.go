@@ -33,19 +33,26 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 	log.Printf("Received Group %v Text Msg : %v", group.NickName, msg.Content)
 
 	wechat := config.GetWechatKeyword()
-	requestText := msg.Content
-	if wechat != nil {
-		content, key := utils.ContainsI(requestText, *wechat)
-		if len(key) == 0 {
-			return nil
-		}
-		splitItems := strings.Split(content, key)
-		if len(splitItems) < 2 {
-			return nil
-		}
-		requestText = strings.TrimSpace(splitItems[1])
+	if nil == wechat {
+		return nil
 	}
 
+	requestText := msg.Content
+
+	content, key := utils.ContainsI(requestText, *wechat)
+	if len(key) == 0 {
+		return nil
+	}
+	splitItems := strings.Split(content, key)
+	if len(splitItems) < 2 {
+		return nil
+	}
+	requestText = strings.TrimSpace(splitItems[1])
+
+	if "" == requestText {
+		return nil
+	}
+	
 	log.Println("问题：", requestText)
 	reply, err := openai.Completions(requestText)
 	if err != nil {
