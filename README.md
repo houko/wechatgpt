@@ -170,13 +170,7 @@ INFO[0099] 3 <Friend:wloscar>
 
 这不比对象来的贴心？
 
-### telegram机器人使用方式
-
-- 方式1: 直接添加小莫的bot进行使用     
-  <img src="screenshots/telegram.png" alt="drawing" style="width:250px;"/>
-
-
-- 方式2：自己部署   
+### telegram机器人使用方式  
   修改 config下的 `chatgpt.telegram`的token后运行`go run main.go`进行启动，参考如下：
 
 ```
