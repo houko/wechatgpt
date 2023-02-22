@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/wechatgpt/wechatbot/config"
 )
 
 // ChatGPTResponseBody 请求体
@@ -24,7 +25,7 @@ type ChatGPTResponseBody struct {
 }
 
 type ChatGPTErrorBody struct {
-	Error   map[string]interface{}   `json:"error"`
+	Error map[string]interface{} `json:"error"`
 }
 
 // ChatGPTRequestBody 响应体
@@ -80,6 +81,7 @@ func Completions(msg string) (*string, error) {
 		log.Println(err)
 		return nil, err
 	}
+
 	log.Printf("request openai json string : %v", string(requestData))
 	req, err := http.NewRequest("POST", "https://api.openai.com/v1/completions", bytes.NewBuffer(requestData))
 	if err != nil {
@@ -94,6 +96,7 @@ func Completions(msg string) (*string, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
 		if err != nil {
@@ -113,14 +116,15 @@ func Completions(msg string) (*string, error) {
 		log.Println(err)
 		return nil, err
 	}
+
 	var reply string
 	if len(gptResponseBody.Choices) > 0 {
 		for _, v := range gptResponseBody.Choices {
 			reply = v["text"].(string)
 			break
 		}
-	} 
-	
+	}
+
 	gptErrorBody := &ChatGPTErrorBody{}
 	err = json.Unmarshal(body, gptErrorBody)
 	if err != nil {
@@ -128,7 +132,7 @@ func Completions(msg string) (*string, error) {
 		return nil, err
 	}
 
-	if (len(reply) == 0) {
+	if len(reply) == 0 {
 		reply = gptErrorBody.Error["message"].(string)
 	}
 

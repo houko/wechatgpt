@@ -2,13 +2,14 @@ package bootstrap
 
 import (
 	"fmt"
+	"strings"
+	"time"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
 	"github.com/wechatgpt/wechatbot/config"
 	"github.com/wechatgpt/wechatbot/handler/telegram"
 	"github.com/wechatgpt/wechatbot/utils"
-	"strings"
-	"time"
 )
 
 func StartTelegramBot() {
@@ -17,6 +18,7 @@ func StartTelegramBot() {
 		log.Info("未找到tg token,不启动tg tot")
 		return
 	}
+
 	bot, err := tgbotapi.NewBotAPI(*telegramKey)
 	if err != nil {
 		log.Error("tg bot 启动失败：", err.Error())
@@ -37,6 +39,7 @@ func StartTelegramBot() {
 		if update.Message == nil {
 			continue
 		}
+
 		text := update.Message.Text
 		chatID := update.Message.Chat.ID
 		chatUserName := update.Message.Chat.UserName
@@ -68,26 +71,32 @@ func StartTelegramBot() {
 			if len(key) == 0 {
 				continue
 			}
+
 			splitItems := strings.Split(content, key)
 			if len(splitItems) < 2 {
 				continue
 			}
+
 			requestText := strings.TrimSpace(splitItems[1])
 			log.Println("问题：", requestText)
 			reply = telegram.Handle(requestText)
 		} else {
 			reply = telegram.Handle(text)
 		}
+
 		if reply == nil {
 			continue
 		}
+
 		msg := tgbotapi.NewMessage(chatID, *reply)
 		send, err := bot.Send(msg)
 		if err != nil {
 			log.Errorf("发送消息出错:%s", err.Error())
 			continue
 		}
+
 		fmt.Println(send.Text)
 	}
+
 	select {}
 }
