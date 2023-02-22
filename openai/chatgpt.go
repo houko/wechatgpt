@@ -125,14 +125,13 @@ func Completions(msg string) (*string, error) {
 		}
 	}
 
-	gptErrorBody := &ChatGPTErrorBody{}
-	err = json.Unmarshal(body, gptErrorBody)
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
-
 	if len(reply) == 0 {
+		gptErrorBody := &ChatGPTErrorBody{}
+		err = json.Unmarshal(body, gptErrorBody)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+		}
 		reply = gptErrorBody.Error["message"].(string)
 	}
 
