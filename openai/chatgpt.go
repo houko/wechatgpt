@@ -8,7 +8,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"strings"
 
 	"wechatbot/config"
 
@@ -137,6 +136,5 @@ func Completions(msg string) (*string, error) {
 	}
 
 	log.Debugf("gpt response full text: %s \n", reply)
-	result := strings.TrimSpace(reply)
-	return &result, nil
+	return &reply, nil
 }
