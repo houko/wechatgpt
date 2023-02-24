@@ -91,13 +91,13 @@ func StartTelegramBot() {
 		}
 
 		msg := tgbotapi.NewMessage(chatID, *reply)
-		send, err := bot.Send(msg)
+		_, err := bot.Send(msg)
 		if err != nil {
 			log.Errorf("发送消息出错:%s", err.Error())
 			continue
 		}
 
-		log.Info("回答：", send.Text)
+		log.Info("回答：", *reply)
 	}
 
 	select {}

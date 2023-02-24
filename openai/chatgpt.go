@@ -135,6 +135,5 @@ func Completions(msg string) (*string, error) {
 		reply = gptErrorBody.Error["message"].(string)
 	}
 
-	log.Debugf("gpt response full text: %s \n", reply)
 	return &reply, nil
 }
