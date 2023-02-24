@@ -79,14 +79,14 @@ func Completions(msg string) (*string, error) {
 	requestData, err := json.Marshal(requestBody)
 
 	if err != nil {
-		log.Println(err)
+		log.Error(err)
 		return nil, err
 	}
 
-	log.Printf("request openai json string : %v", string(requestData))
+	log.Debugf("request openai json string : %v", string(requestData))
 	req, err := http.NewRequest("POST", "https://api.openai.com/v1/completions", bytes.NewBuffer(requestData))
 	if err != nil {
-		log.Println(err)
+		log.Error(err)
 		return nil, err
 	}
 
@@ -111,10 +111,10 @@ func Completions(msg string) (*string, error) {
 	}
 
 	gptResponseBody := &ChatGPTResponseBody{}
-	log.Println(string(body))
+	log.Debug(string(body))
 	err = json.Unmarshal(body, gptResponseBody)
 	if err != nil {
-		log.Println(err)
+		log.Error(err)
 		return nil, err
 	}
 
@@ -130,13 +130,13 @@ func Completions(msg string) (*string, error) {
 		gptErrorBody := &ChatGPTErrorBody{}
 		err = json.Unmarshal(body, gptErrorBody)
 		if err != nil {
-			log.Println(err)
+			log.Error(err)
 			return nil, err
 		}
 		reply = gptErrorBody.Error["message"].(string)
 	}
 
-	log.Printf("gpt response full text: %s \n", reply)
+	log.Debugf("gpt response full text: %s \n", reply)
 	result := strings.TrimSpace(reply)
 	return &result, nil
 }

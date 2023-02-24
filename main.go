@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	log.SetLevel(log.DebugLevel)
+	//log.SetLevel(log.InfoLevel)
+
 	log.SetReportCaller(true)
 	log.SetFormatter(&log.TextFormatter{
 		DisableColors: false,
@@ -27,5 +30,6 @@ func main() {
 	} else if telegramEnv != nil {
 		bootstrap.StartTelegramBot()
 	}
+
 	log.Info("程序退出")
 }

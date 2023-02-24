@@ -16,7 +16,7 @@ func StartTelegramBot() {
 	log.Info("Start Telegram Bot")
 	telegramKey := config.GetTelegram()
 	if telegramKey == nil {
-		log.Info("未找到tg token,不启动tg tot")
+		log.Error("未找到tg token,不启动tg tot")
 		return
 	}
 
@@ -79,9 +79,10 @@ func StartTelegramBot() {
 			}
 
 			requestText := strings.TrimSpace(splitItems[1])
-			log.Println("问题：", requestText)
+			log.Info("问题：", requestText)
 			reply = telegram.Handle(requestText)
 		} else {
+			log.Info("问题：", text)
 			reply = telegram.Handle(text)
 		}
 
@@ -96,7 +97,7 @@ func StartTelegramBot() {
 			continue
 		}
 
-		log.Println(send.Text)
+		log.Info("回答：", send.Text)
 	}
 
 	select {}
