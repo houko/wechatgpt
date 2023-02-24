@@ -10,6 +10,7 @@ import (
 )
 
 func StartWebChat() {
+	log.Info("Start WebChat Bot")
 	bot := openwechat.DefaultBot(openwechat.Desktop)
 	bot.MessageHandler = wechat.Handler
 	bot.UUIDCallback = openwechat.PrintlnQrcodeUrl

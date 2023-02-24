@@ -13,6 +13,7 @@ import (
 )
 
 func StartTelegramBot() {
+	log.Info("Start Telegram Bot")
 	telegramKey := config.GetTelegram()
 	if telegramKey == nil {
 		log.Info("未找到tg token,不启动tg tot")

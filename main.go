@@ -9,6 +9,12 @@ import (
 
 func main() {
 	log.SetReportCaller(true)
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: false,
+		FullTimestamp: true,
+	})
+
+	log.Info("程序启动")
 	err := config.LoadConfig()
 	if err != nil {
 		log.Warn("没有找到配置文件，尝试读取环境变量")
@@ -21,4 +27,5 @@ func main() {
 	} else if telegramEnv != nil {
 		bootstrap.StartTelegramBot()
 	}
+	log.Info("程序退出")
 }
