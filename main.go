@@ -1,9 +1,10 @@
 package main
 
 import (
+	"wechatbot/bootstrap"
+	"wechatbot/config"
+
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/bootstrap"
-	"github.com/wechatgpt/wechatbot/config"
 )
 
 func main() {

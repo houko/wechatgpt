@@ -3,9 +3,10 @@ package bootstrap
 import (
 	"os"
 
+	"wechatbot/handler/wechat"
+
 	"github.com/eatmoreapple/openwechat"
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/handler/wechat"
 )
 
 func StartWebChat() {

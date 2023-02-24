@@ -4,11 +4,12 @@ import (
 	"strings"
 	"time"
 
+	"wechatbot/config"
+	"wechatbot/handler/telegram"
+	"wechatbot/utils"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
-	"github.com/wechatgpt/wechatbot/handler/telegram"
-	"github.com/wechatgpt/wechatbot/utils"
 )
 
 func StartTelegramBot() {

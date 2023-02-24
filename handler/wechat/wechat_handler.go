@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"strings"
 
+	"wechatbot/config"
+	"wechatbot/openai"
+	"wechatbot/utils"
+
 	"github.com/eatmoreapple/openwechat"
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
-	"github.com/wechatgpt/wechatbot/openai"
-	"github.com/wechatgpt/wechatbot/utils"
 )
 
 var _ MessageHandlerInterface = (*GroupMessageHandler)(nil)

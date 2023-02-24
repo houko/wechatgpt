@@ -10,8 +10,9 @@ import (
 	"net/http"
 	"strings"
 
+	"wechatbot/config"
+
 	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
 )
 
 // ChatGPTResponseBody 请求体
