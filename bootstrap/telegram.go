@@ -1,7 +1,6 @@
 package bootstrap
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -95,7 +94,7 @@ func StartTelegramBot() {
 			continue
 		}
 
-		fmt.Println(send.Text)
+		log.Println(send.Text)
 	}
 
 	select {}
