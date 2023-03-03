@@ -14,51 +14,77 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// ChatGPTResponseBody 请求体
+type ChatMessage struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}
+
+// ChatGPTRequestBody 请求体
+type ChatGPTRequestBody struct {
+	Model    string        `json:"model"`
+	Messages []ChatMessage `json:"messages"`
+}
+
+type ResponseChoice struct {
+	Index        int         `json:"index"`
+	Message      ChatMessage `json:"message"`
+	FinishReason string      `json:"finish_reason"`
+}
+
+type ResponseUsage struct {
+	PromptTokens     int `json:"prompt_tokens"`
+	CompletionTokens int `json:"completion_tokens"`
+	TotalTokens      int `json:"total_tokens"`
+}
+
+// ChatGPTResponseBody 响应体
 type ChatGPTResponseBody struct {
-	ID      string                   `json:"id"`
-	Object  string                   `json:"object"`
-	Created int                      `json:"created"`
-	Model   string                   `json:"model"`
-	Choices []map[string]interface{} `json:"choices"`
-	Usage   map[string]interface{}   `json:"usage"`
+	ID      string           `json:"id"`
+	Object  string           `json:"object"`
+	Created int              `json:"created"`
+	Choices []ResponseChoice `json:"choices"`
+	Usage   ResponseUsage    `json:"usage"`
 }
 
 type ChatGPTErrorBody struct {
 	Error map[string]interface{} `json:"error"`
 }
 
-// ChatGPTRequestBody 响应体
-type ChatGPTRequestBody struct {
-	Model            string  `json:"model"`
-	Prompt           string  `json:"prompt"`
-	MaxTokens        int     `json:"max_tokens"`
-	Temperature      float32 `json:"temperature"`
-	TopP             int     `json:"top_p"`
-	FrequencyPenalty int     `json:"frequency_penalty"`
-	PresencePenalty  int     `json:"presence_penalty"`
+/*
+curl https://api.openai.com/v1/chat/completions \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -d '{
+  "model": "gpt-3.5-turbo",
+  "messages": [{"role": "user", "content": "Hello!"}]
+}'
+
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [{"role": "user", "content": "Hello!"}]
 }
 
-// Completions https://api.openai.com/v1/completions
-// nodejs example
-// const { Configuration, OpenAIApi } = require("openai");
-//
-//	 const configuration = new Configuration({
-//	   apiKey: process.env.OPENAI_API_KEY,
-//	 });
-//	 const openai = new OpenAIApi(configuration);
-//
-//	 const response = await openai.createCompletion({
-//	   model: "text-davinci-003",
-//	   prompt: "I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"Unknown\".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: Unknown\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: Unknown\n\nQ: Where is the Valley of Kings?\nA:",
-//	   temperature: 0,
-//	   max_tokens: 100,
-//	   top_p: 1,
-//	   frequency_penalty: 0.0,
-//	   presence_penalty: 0.0,
-//	   stop: ["\n"],
-//	});
-//
+{
+  "id": "chatcmpl-123",
+  "object": "chat.completion",
+  "created": 1677652288,
+  "choices": [{
+    "index": 0,
+    "message": {
+      "role": "assistant",
+      "content": "\n\nHello there, how may I assist you today?",
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {
+    "prompt_tokens": 9,
+    "completion_tokens": 12,
+    "total_tokens": 21
+  }
+}
+
+*/
+
 // Completions sendMsg
 func Completions(msg string) (*string, error) {
 	apiKey := config.GetOpenAiApiKey()
@@ -66,14 +92,15 @@ func Completions(msg string) (*string, error) {
 		return nil, errors.New("未配置apiKey")
 	}
 
+	var messages []ChatMessage
+	messages = append(messages, ChatMessage{
+		Role:    "user",
+		Content: msg,
+	})
+
 	requestBody := ChatGPTRequestBody{
-		Model:            "text-davinci-003",
-		Prompt:           msg,
-		MaxTokens:        4000,
-		Temperature:      0.7,
-		TopP:             1,
-		FrequencyPenalty: 0,
-		PresencePenalty:  0,
+		Model:    "gpt-3.5-turbo",
+		Messages: messages,
 	}
 	requestData, err := json.Marshal(requestBody)
 
@@ -83,7 +110,7 @@ func Completions(msg string) (*string, error) {
 	}
 
 	log.Debugf("request openai json string : %v", string(requestData))
-	req, err := http.NewRequest("POST", "https://api.openai.com/v1/completions", bytes.NewBuffer(requestData))
+	req, err := http.NewRequest("POST", "https://api.openai.com/v1/chat/completions", bytes.NewBuffer(requestData))
 	if err != nil {
 		log.Error(err)
 		return nil, err
@@ -120,8 +147,8 @@ func Completions(msg string) (*string, error) {
 	var reply string
 	if len(gptResponseBody.Choices) > 0 {
 		for _, v := range gptResponseBody.Choices {
-			reply = v["text"].(string)
-			break
+			reply += "\n"
+			reply += v.Message.Content
 		}
 	}
 
@@ -132,7 +159,9 @@ func Completions(msg string) (*string, error) {
 			log.Error(err)
 			return nil, err
 		}
-		reply = gptErrorBody.Error["message"].(string)
+
+		reply += "Error: "
+		reply += gptErrorBody.Error["message"].(string)
 	}
 
 	return &reply, nil
