@@ -85,6 +85,8 @@ curl https://api.openai.com/v1/chat/completions \
 
 */
 
+var contextMgr ContextMgr
+
 // Completions sendMsg
 func Completions(msg string) (*string, error) {
 	apiKey := config.GetOpenAiApiKey()
@@ -93,6 +95,24 @@ func Completions(msg string) (*string, error) {
 	}
 
 	var messages []ChatMessage
+	messages = append(messages, ChatMessage{
+		Role:    "system",
+		Content: "You are a helpful assistant.",
+	})
+
+	list := contextMgr.GetData()
+	for i := 0; i < len(list); i++ {
+		messages = append(messages, ChatMessage{
+			Role:    "user",
+			Content: list[i].Request,
+		})
+
+		messages = append(messages, ChatMessage{
+			Role:    "assistant",
+			Content: list[i].Response,
+		})
+	}
+
 	messages = append(messages, ChatMessage{
 		Role:    "user",
 		Content: msg,
@@ -150,6 +170,8 @@ func Completions(msg string) (*string, error) {
 			reply += "\n"
 			reply += v.Message.Content
 		}
+
+		contextMgr.AppendMsg(msg, reply)
 	}
 
 	if len(reply) == 0 {
