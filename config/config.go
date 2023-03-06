@@ -31,21 +31,24 @@ func LoadConfig() error {
 	if err := viper.ReadInConfig(); err != nil {
 		return err
 	}
+
 	if err := viper.Unmarshal(&config); err != nil {
 		return err
 	}
+
 	return nil
 }
 
 func GetWechat() *string {
 	wechat := getEnv("wechat")
-
 	if wechat != nil {
 		return wechat
 	}
+
 	if config == nil {
 		return nil
 	}
+
 	if wechat == nil {
 		wechat = config.ChatGpt.Wechat
 	}
@@ -58,9 +61,11 @@ func GetWechatKeyword() *string {
 	if keyword != nil {
 		return keyword
 	}
+
 	if config == nil {
 		return nil
 	}
+
 	if keyword == nil {
 		keyword = config.ChatGpt.WechatKeyword
 	}
@@ -72,9 +77,11 @@ func GetTelegram() *string {
 	if tg != nil {
 		return tg
 	}
+
 	if config == nil {
 		return nil
 	}
+
 	if tg == nil {
 		tg = config.ChatGpt.Telegram
 	}
@@ -87,9 +94,11 @@ func GetTelegramKeyword() *string {
 	if tgKeyword != nil {
 		return tgKeyword
 	}
+
 	if config == nil {
 		return nil
 	}
+
 	if tgKeyword == nil {
 		tgKeyword = config.ChatGpt.TgKeyword
 	}
@@ -102,9 +111,11 @@ func GetTelegramWhitelist() *string {
 	if tgWhitelist != nil {
 		return tgWhitelist
 	}
+
 	if config == nil {
 		return nil
 	}
+
 	if tgWhitelist == nil {
 		tgWhitelist = config.ChatGpt.TgWhitelist
 	}
@@ -113,7 +124,6 @@ func GetTelegramWhitelist() *string {
 
 func GetOpenAiApiKey() *string {
 	apiKey := getEnv("api_key")
-
 	if apiKey != nil {
 		return apiKey
 	}
@@ -121,6 +131,7 @@ func GetOpenAiApiKey() *string {
 	if config == nil {
 		return nil
 	}
+
 	if apiKey == nil {
 		apiKey = &config.ChatGpt.Token
 	}
@@ -143,7 +154,9 @@ func getEnv(key string) *string {
 
 	if len(value) > 0 {
 		return &value
-	} else if config.ChatGpt.WechatKeyword != nil {
+	}
+
+	if config.ChatGpt.WechatKeyword != nil {
 		value = *config.ChatGpt.WechatKeyword
 	}
 	return nil

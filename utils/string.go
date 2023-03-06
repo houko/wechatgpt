@@ -7,6 +7,7 @@ func ContainsI(a string, b string) (string, string) {
 		strings.ToLower(a),
 		strings.ToLower(b),
 	)
+
 	if contain {
 		return strings.ToLower(a), strings.ToLower(b)
 	}

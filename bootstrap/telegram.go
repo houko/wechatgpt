@@ -1,22 +1,25 @@
 package bootstrap
 
 import (
-	"fmt"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	log "github.com/sirupsen/logrus"
-	"github.com/wechatgpt/wechatbot/config"
-	"github.com/wechatgpt/wechatbot/handler/telegram"
-	"github.com/wechatgpt/wechatbot/utils"
 	"strings"
 	"time"
+
+	"wechatbot/config"
+	"wechatbot/handler/telegram"
+	"wechatbot/utils"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	log "github.com/sirupsen/logrus"
 )
 
 func StartTelegramBot() {
+	log.Info("Start Telegram Bot")
 	telegramKey := config.GetTelegram()
 	if telegramKey == nil {
-		log.Info("未找到tg token,不启动tg tot")
+		log.Info("未找到tg token,不启动tg bot")
 		return
 	}
+
 	bot, err := tgbotapi.NewBotAPI(*telegramKey)
 	if err != nil {
 		log.Error("tg bot 启动失败：", err.Error())
@@ -37,6 +40,7 @@ func StartTelegramBot() {
 		if update.Message == nil {
 			continue
 		}
+
 		text := update.Message.Text
 		chatID := update.Message.Chat.ID
 		chatUserName := update.Message.Chat.UserName
@@ -68,26 +72,33 @@ func StartTelegramBot() {
 			if len(key) == 0 {
 				continue
 			}
+
 			splitItems := strings.Split(content, key)
 			if len(splitItems) < 2 {
 				continue
 			}
+
 			requestText := strings.TrimSpace(splitItems[1])
-			log.Println("问题：", requestText)
+			log.Info("问题：", requestText)
 			reply = telegram.Handle(requestText)
 		} else {
+			log.Info("问题：", text)
 			reply = telegram.Handle(text)
 		}
+
 		if reply == nil {
 			continue
 		}
+
 		msg := tgbotapi.NewMessage(chatID, *reply)
-		send, err := bot.Send(msg)
+		_, err := bot.Send(msg)
 		if err != nil {
 			log.Errorf("发送消息出错:%s", err.Error())
 			continue
 		}
-		fmt.Println(send.Text)
+
+		log.Info("回答：", *reply)
 	}
+
 	select {}
 }

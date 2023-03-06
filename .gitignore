@@ -1,3 +1,6 @@
 .idea
 local/config.yaml
 token.json
+wechatbot
+wechatbot.exe
+run.log
