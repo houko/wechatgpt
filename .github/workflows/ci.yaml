@@ -21,4 +21,4 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: xiaomoinfo/wechatgpt:3.0.0,xiaomoinfo/wechatgpt:latest
+          tags: xiaomoinfo/wechatgpt:v3.0.1,xiaomoinfo/wechatgpt:latest
