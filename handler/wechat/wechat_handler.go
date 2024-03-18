@@ -36,8 +36,8 @@ func (gmh *GroupMessageHandler) ReplyText(msg *openwechat.Message) error {
 
 	wechat := config.GetWechatKeyword()
 	requestText := msg.Content
-	if wechat != nil {
-		content, key := utils.ContainsI(requestText, *wechat)
+	if wechat != "" {
+		content, key := utils.ContainsI(requestText, wechat)
 		if len(key) == 0 {
 			return nil
 		}

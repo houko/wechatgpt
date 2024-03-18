@@ -15,12 +15,12 @@ import (
 func StartTelegramBot() {
 	log.Info("Start Telegram Bot")
 	telegramKey := config.GetTelegram()
-	if telegramKey == nil {
+	if telegramKey == "" {
 		log.Info("未找到tg token,不启动tg bot")
 		return
 	}
 
-	bot, err := tgbotapi.NewBotAPI(*telegramKey)
+	bot, err := tgbotapi.NewBotAPI(telegramKey)
 	if err != nil {
 		log.Error("tg bot 启动失败：", err.Error())
 		return
@@ -46,8 +46,8 @@ func StartTelegramBot() {
 		chatUserName := update.Message.Chat.UserName
 
 		tgUserNameStr := config.GetTelegramWhitelist()
-		if tgUserNameStr != nil {
-			tgUserNames := strings.Split(*tgUserNameStr, ",")
+		if tgUserNameStr != "" {
+			tgUserNames := strings.Split(tgUserNameStr, ",")
 			if len(tgUserNames) > 0 {
 				found := false
 				for _, name := range tgUserNames {
@@ -67,8 +67,8 @@ func StartTelegramBot() {
 		tgKeyWord := config.GetTelegramKeyword()
 		var reply *string
 		// 如果设置了关键字就以关键字为准，没设置就所有消息都监听
-		if tgKeyWord != nil {
-			content, key := utils.ContainsI(text, *tgKeyWord)
+		if tgKeyWord != "" {
+			content, key := utils.ContainsI(text, tgKeyWord)
 			if len(key) == 0 {
 				continue
 			}

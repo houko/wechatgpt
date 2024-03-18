@@ -90,7 +90,7 @@ var contextMgr ContextMgr
 // Completions sendMsg
 func Completions(msg string) (*string, error) {
 	apiKey := config.GetOpenAiApiKey()
-	if apiKey == nil {
+	if apiKey == "" {
 		return nil, errors.New("未配置apiKey")
 	}
 
@@ -119,7 +119,7 @@ func Completions(msg string) (*string, error) {
 	})
 
 	requestBody := ChatGPTRequestBody{
-		Model:    "gpt-3.5-turbo",
+		Model:    config.GetOpenAiModel(),
 		Messages: messages,
 	}
 	requestData, err := json.Marshal(requestBody)
@@ -137,7 +137,7 @@ func Completions(msg string) (*string, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", *apiKey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", apiKey))
 	client := &http.Client{}
 	response, err := client.Do(req)
 	if err != nil {
