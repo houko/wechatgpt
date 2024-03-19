@@ -65,7 +65,7 @@ func StartTelegramBot() {
 		}
 
 		tgKeyWord := config.GetTelegramKeyword()
-		var reply *string
+		reply := ""
 		// 如果设置了关键字就以关键字为准，没设置就所有消息都监听
 		if tgKeyWord != "" {
 			content, key := utils.ContainsI(text, tgKeyWord)
@@ -86,18 +86,18 @@ func StartTelegramBot() {
 			reply = telegram.Handle(text)
 		}
 
-		if reply == nil {
+		if reply == "" {
 			continue
 		}
 
-		msg := tgbotapi.NewMessage(chatID, *reply)
+		msg := tgbotapi.NewMessage(chatID, reply)
 		_, err := bot.Send(msg)
 		if err != nil {
 			log.Errorf("发送消息出错:%s", err.Error())
 			continue
 		}
 
-		log.Info("回答：", *reply)
+		log.Info("回答：", reply)
 	}
 
 	select {}

@@ -14,13 +14,15 @@ type Config struct {
 }
 
 type ChatGptConfig struct {
-	Token         string `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
-	OpenAIModel   string `json:"openai_model,omitempty"  mapstructure:"openai_model,omitempty"  yaml:"openai_model,omitempty"`
-	Wechat        string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
-	WechatKeyword string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
-	Telegram      string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
-	TgWhitelist   string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
-	TgKeyword     string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
+	Token               string `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
+	OpenAITextModel     string `json:"openai_text_model,omitempty"  mapstructure:"openai_text_model,omitempty"  yaml:"openai_text_model,omitempty"`
+	OpenAIImageGenModel string `json:"openai_image_gen_model,omitempty"  mapstructure:"openai_image_gen_model,omitempty"  yaml:"openai_image_gen_model,omitempty"`
+	OpenAIVisionModel   string `json:"openai_vision_model,omitempty"  mapstructure:"openai_vision_model,omitempty"  yaml:"openai_vision_model,omitempty"`
+	Wechat              string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
+	WechatKeyword       string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
+	Telegram            string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
+	TgWhitelist         string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
+	TgKeyword           string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
 }
 
 func LoadConfig() error {
@@ -139,7 +141,7 @@ func GetOpenAiApiKey() string {
 	return apiKey
 }
 
-func GetOpenAiModel() (model string) {
+func GetOpenAiTextModel() (model string) {
 	defer func() {
 		if model == "" {
 			model = "gpt-3.5-turbo"
@@ -155,7 +157,49 @@ func GetOpenAiModel() (model string) {
 	}
 
 	if model == "" {
-		model = config.ChatGpt.OpenAIModel
+		model = config.ChatGpt.OpenAITextModel
+	}
+	return model
+}
+
+func GetOpenAiImageGenModel() (model string) {
+	defer func() {
+		if model == "" {
+			model = "dall-e-2"
+		}
+	}()
+	model = getEnv("openai_image_gen_model")
+	if model != "" {
+		return model
+	}
+
+	if config == nil {
+		return ""
+	}
+
+	if model == "" {
+		model = config.ChatGpt.OpenAIImageGenModel
+	}
+	return model
+}
+
+func GetOpenAiVisionModel() (model string) {
+	defer func() {
+		if model == "" {
+			model = "gpt-4-1106-vision-preview"
+		}
+	}()
+	model = getEnv("openai_vision_model")
+	if model != "" {
+		return model
+	}
+
+	if config == nil {
+		return ""
+	}
+
+	if model == "" {
+		model = config.ChatGpt.OpenAIVisionModel
 	}
 	return model
 }

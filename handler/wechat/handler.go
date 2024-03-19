@@ -8,6 +8,7 @@ import (
 type MessageHandlerInterface interface {
 	handle(*openwechat.Message) error
 	ReplyText(*openwechat.Message) error
+	ReplyPicture(*openwechat.Message) error
 }
 
 type Type string

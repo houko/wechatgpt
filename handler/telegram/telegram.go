@@ -8,9 +8,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func Handle(msg string) *string {
+func Handle(msg string) string {
 	requestText := strings.TrimSpace(msg)
-	reply, err := openai.Completions(requestText)
+	reply, err := openai.Completions(requestText, "")
 	if err != nil {
 		log.Error(err)
 	}
