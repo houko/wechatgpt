@@ -7,20 +7,23 @@
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
   </a>
-  <a href="https://twitter.com/xiaomoinfo" target="_blank">
-    <img alt="Twitter: xiaomoinfo" src="https://img.shields.io/twitter/follow/xiaomoinfo.svg?style=social" />
-  </a>
 </p>
 
-## 仓库地址
+## 介绍
 
-https://github.com/houko/wechatgpt
+基于 https://github.com/houko/wechatgpt
 
-## 准备运行环境
+增加功能：
+- 多模态支持
+  - gpt4-vision-preview 识别图片并回复
+  - DALL·E 生成图片（使用 “生成图片：” 前缀）
+- 支持配置 OpenAI 模型
 
-```
-go mod tidy 
-cp config/config.yaml.example local/config.yaml
+## 运行命令
+
+```bash
+git clone https://github.com/t3ls/wechatgpt.git
+cd wechatgpt && docker compose up -d
 ```
 
 ## 修改你的token
