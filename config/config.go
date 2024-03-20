@@ -147,7 +147,7 @@ func GetOpenAiTextModel() (model string) {
 			model = "gpt-3.5-turbo"
 		}
 	}()
-	model = getEnv("openai_model")
+	model = getEnv("openai_text_model")
 	if model != "" {
 		return model
 	}
