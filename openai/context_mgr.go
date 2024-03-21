@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+const contextExpireTime = 2 * 60
+
 type Context struct {
 	Request  string
 	Response string
@@ -14,8 +16,10 @@ type ContextMgr struct {
 	contextList []*Context
 }
 
-func (m *ContextMgr) Init() {
-	m.contextList = make([]*Context, 10)
+func NewContextMgr() *ContextMgr {
+	return &ContextMgr{
+		contextList: make([]*Context, 0),
+	}
 }
 
 func (m *ContextMgr) checkExpire() {
@@ -23,7 +27,7 @@ func (m *ContextMgr) checkExpire() {
 	if len(m.contextList) > 0 {
 		startPos := len(m.contextList) - 1
 		for i := 0; i < len(m.contextList); i++ {
-			if timeNow-m.contextList[i].Time < 1*60 {
+			if timeNow-m.contextList[i].Time < contextExpireTime {
 				startPos = i
 				break
 			}
@@ -42,4 +46,21 @@ func (m *ContextMgr) AppendMsg(request string, response string) {
 func (m *ContextMgr) GetData() []*Context {
 	m.checkExpire()
 	return m.contextList
+}
+
+func (m *ContextMgr) BuildMsg() []ChatMessage {
+	messages := make([]ChatMessage, 0)
+	list := m.GetData()
+	for i := 0; i < len(list); i++ {
+		messages = append(messages, ChatMessage{
+			Role:    "user",
+			Content: list[i].Request,
+		})
+
+		messages = append(messages, ChatMessage{
+			Role:    "assistant",
+			Content: list[i].Response,
+		})
+	}
+	return messages
 }

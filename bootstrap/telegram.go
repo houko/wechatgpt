@@ -80,10 +80,10 @@ func StartTelegramBot() {
 
 			requestText := strings.TrimSpace(splitItems[1])
 			log.Info("问题：", requestText)
-			reply = telegram.Handle(requestText)
+			reply = telegram.Handle(chatUserName, requestText)
 		} else {
 			log.Info("问题：", text)
-			reply = telegram.Handle(text)
+			reply = telegram.Handle(chatUserName, text)
 		}
 
 		if reply == "" {

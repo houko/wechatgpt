@@ -11,13 +11,16 @@
 
 ## 介绍
 
-基于 https://github.com/houko/wechatgpt
+基于 OpenAI 官方 API 开发的微信智能机器人。
 
-增加功能：
-- 多模态支持
+功能：
+- 多模态对话
   - gpt4-vision-preview 识别图片并回复
-  - DALL·E 生成图片（使用 “生成图片：” 前缀）
-- 支持配置 OpenAI 模型
+  - DALL·E 生成图片（“生成图片” 关键字）
+
+感谢 https://github.com/houko/wechatgpt 提供的基础代码
+
+在 `wechatgpt` 的基础上，我增加了多模态对话的功能，以及修复一些问题。
 
 ## 运行命令
 
@@ -48,6 +51,9 @@ chatgpt:
 | 变量名            | 值                 | 作用               |
 |----------------|-------------------|------------------|
 | api_key        | "chatgpt的api_key" | 必填项              |
+｜openai_text_model| "gpt-3.5-turbo" | 可选项，不填默认为gpt-3.5-turbo |
+| openai_vision_model| "gpt4-vision-preview" | 可选项，不填默认为gpt4-vision-preview |
+| openai_image_model| "dall-e-2" | 可选项，不填默认为dall-e-2 |
 | wechat         | "true" 或缺省        | 如果为true就会启动微信机器人 |
 | wechat_keyword | "关键字"或缺省          | 如果缺省则发任何消息机器都会回复 |
 | telegram       | telegram的token或缺省 | 如果要启动tg机器人需要填写   |
@@ -58,31 +64,10 @@ chatgpt:
 go run main.go
 ```
 
-## `Docker` 方式运行`wechatgpt`
+或者修改 docker-compose.yml 文件中的环境变量后运行
 
-运行微信智能机器人的话运行下面这段代码，微信登陆的地址请查看运行日志`docker logs <containerId>`
 
-```
-docker run -d \
---name wechatgpt \
--e api_key="你的chatgpt api_key" \
--e wechat="true" \
--e wechat_keyword="微信触发关键字" \
-xiaomoinfo/wechatgpt:latest
-
-```
-
-运行微信智能机器人不需要任何触发关键字请运行下面这段代码，适合微信小号专业做机器人用，微信登陆的地址请查看运行日志`docker logs <containerId>`   
-`警告：以下命令会让任何消息都会被机器人接管，微信主号不要用下面这个命令`
-
-```
-docker run -d \
---name wechatgpt \
--e api_key="你的chatgpt api_key" \
--e wechat="true" \
-xiaomoinfo/wechatgpt:latest
-
-```
+## 运行`telegram`智能机器人（暂不对 telegram 相关原始代码进行维护）
 
 运行`telegram`智能机器人的话运行下面这段代码
 
@@ -154,54 +139,6 @@ INFO[0099] 3 <Friend:wloscar>
 默认为`chatgpt`，如果想设置其他的触发方式可以修改`local/config.yaml`的wechat。此时，如果别人给你发消息带有关键字`chatgpt`
 ，你的微信就会调用`chatGPT`AI自动回复你的好友。
 当然，在群里也是可以的。
-
-### 使用场景1
-
-别人给你发消息时，如果消息中带有关键字，系统就会调用AI自动帮你回复此问题。
-
-<img src="screenshots/IMG_3837.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3840.png" alt="drawing" style="width:250px;"/><img src="screenshots/IMG_3850.png" alt="drawing" style="width:250px;"/>
-
-### 使用场景2
-
-自己给自己发消息时，如果消息中带有关键字，系统会也调用AI自动帮你回复此问题。
-
-<img src="screenshots/IMG_3844.png" alt="drawing" style="width:250px;"/>
-
-### 意外之喜
-
-<img src="screenshots/IMG_3843.png" alt="drawing" style="width:250px;"/>   
-
-这不比对象来的贴心？
-
-### telegram机器人使用方式  
-  修改 config下的 `chatgpt.telegram`的token后运行`go run main.go`进行启动，参考如下：
-
-```
-chatgpt:
-  wechat: 小莫
-  token: sk-pKHZD1fLYyd56sadsdUvIODTT3ssjdfadsJC2gTuqqhTum
-  telegram: 5718911250:AAhRdbdfxzcCFoM_GyI2g9B18S7WbYviQ 
-```
-
-`token`获取方式，请在telegram中添加好友`@botFather`并按提示操作
-
-<img src="screenshots/IMG_3991.png" alt="drawing" style="width:250px;"/>
-
-## 总结
-
-- 你可以把它当作你的智能助理，帮助你快速回复消息。
-- 你可以把它当作一个智能机器人，邀请在群里之后通过关键字帮助大家解答问题。
-- 你可以把它当作你的智多星，有什么问题不懂的时候随时问它。
-
-## 变爸爸事件
-
-放在B站
-[用chatgpt写了个微信机器人结果变爸爸了](https://www.bilibili.com/video/BV1B24y1Q7us/)
-
-## 贡献本仓库
-
-如果大家有玩的时候有遇到一些奇怪的对话可以截图发PR分享给大家。另外对本项目有什么想法或者贡献的话欢迎提[issue](https://github.com/houko/wechatgpt/issues)
-或[pr](https://github.com/houko/wechatgpt/pulls)
 
 ## Q&A
 

@@ -1,11 +1,12 @@
 version: '2.4'
 services:
   wechatgpt:
+    container_name: wechatgpt
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      api_key: "your-api-key"
+      api_key: "YOUR_API_KEY"
       openai_text_model: gpt-4-0125-preview
       openai_image_gen_model: dall-e-3
       openai_vision_model: gpt-4-vision-preview
