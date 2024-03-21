@@ -14,12 +14,15 @@ type Config struct {
 }
 
 type ChatGptConfig struct {
-	Token         string  `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
-	Wechat        *string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
-	WechatKeyword *string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
-	Telegram      *string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
-	TgWhitelist   *string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
-	TgKeyword     *string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
+	Token               string `json:"token,omitempty"  mapstructure:"token,omitempty"  yaml:"token,omitempty"`
+	OpenAITextModel     string `json:"openai_text_model,omitempty"  mapstructure:"openai_text_model,omitempty"  yaml:"openai_text_model,omitempty"`
+	OpenAIImageGenModel string `json:"openai_image_gen_model,omitempty"  mapstructure:"openai_image_gen_model,omitempty"  yaml:"openai_image_gen_model,omitempty"`
+	OpenAIVisionModel   string `json:"openai_vision_model,omitempty"  mapstructure:"openai_vision_model,omitempty"  yaml:"openai_vision_model,omitempty"`
+	Wechat              string `json:"wechat,omitempty" mapstructure:"wechat,omitempty" yaml:"wechat,omitempty"`
+	WechatKeyword       string `json:"wechat_keyword"   mapstructure:"wechat_keyword"   yaml:"wechat_keyword"`
+	Telegram            string `json:"telegram"         mapstructure:"telegram"         yaml:"telegram"`
+	TgWhitelist         string `json:"tg_whitelist"     mapstructure:"tg_whitelist"     yaml:"tg_whitelist"`
+	TgKeyword           string `json:"tg_keyword"       mapstructure:"tg_keyword"       yaml:"tg_keyword"`
 }
 
 func LoadConfig() error {
@@ -39,125 +42,188 @@ func LoadConfig() error {
 	return nil
 }
 
-func GetWechat() *string {
+func GetWechat() string {
 	wechat := getEnv("wechat")
-	if wechat != nil {
+	if wechat != "" {
 		return wechat
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if wechat == nil {
+	if wechat == "" {
 		wechat = config.ChatGpt.Wechat
 	}
 	return wechat
 }
 
-func GetWechatKeyword() *string {
+func GetWechatKeyword() string {
 	keyword := getEnv("wechat_keyword")
 
-	if keyword != nil {
+	if keyword != "" {
 		return keyword
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if keyword == nil {
+	if keyword == "" {
 		keyword = config.ChatGpt.WechatKeyword
 	}
 	return keyword
 }
 
-func GetTelegram() *string {
+func GetTelegram() string {
 	tg := getEnv("telegram")
-	if tg != nil {
+	if tg != "" {
 		return tg
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if tg == nil {
+	if tg == "" {
 		tg = config.ChatGpt.Telegram
 	}
 	return tg
 }
 
-func GetTelegramKeyword() *string {
+func GetTelegramKeyword() string {
 	tgKeyword := getEnv("tg_keyword")
 
-	if tgKeyword != nil {
+	if tgKeyword != "" {
 		return tgKeyword
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if tgKeyword == nil {
+	if tgKeyword == "" {
 		tgKeyword = config.ChatGpt.TgKeyword
 	}
 	return tgKeyword
 }
 
-func GetTelegramWhitelist() *string {
+func GetTelegramWhitelist() string {
 	tgWhitelist := getEnv("tg_whitelist")
 
-	if tgWhitelist != nil {
+	if tgWhitelist != "" {
 		return tgWhitelist
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if tgWhitelist == nil {
+	if tgWhitelist == "" {
 		tgWhitelist = config.ChatGpt.TgWhitelist
 	}
 	return tgWhitelist
 }
 
-func GetOpenAiApiKey() *string {
+func GetOpenAiApiKey() string {
 	apiKey := getEnv("api_key")
-	if apiKey != nil {
+	if apiKey != "" {
 		return apiKey
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
-	if apiKey == nil {
-		apiKey = &config.ChatGpt.Token
+	if apiKey == "" {
+		apiKey = config.ChatGpt.Token
 	}
 	return apiKey
 }
 
-func getEnv(key string) *string {
+func GetOpenAiTextModel() (model string) {
+	defer func() {
+		if model == "" {
+			model = "gpt-3.5-turbo"
+		}
+	}()
+	model = getEnv("openai_text_model")
+	if model != "" {
+		return model
+	}
+
+	if config == nil {
+		return ""
+	}
+
+	if model == "" {
+		model = config.ChatGpt.OpenAITextModel
+	}
+	return model
+}
+
+func GetOpenAiImageGenModel() (model string) {
+	defer func() {
+		if model == "" {
+			model = "dall-e-2"
+		}
+	}()
+	model = getEnv("openai_image_gen_model")
+	if model != "" {
+		return model
+	}
+
+	if config == nil {
+		return ""
+	}
+
+	if model == "" {
+		model = config.ChatGpt.OpenAIImageGenModel
+	}
+	return model
+}
+
+func GetOpenAiVisionModel() (model string) {
+	defer func() {
+		if model == "" {
+			model = "gpt-4-1106-vision-preview"
+		}
+	}()
+	model = getEnv("openai_vision_model")
+	if model != "" {
+		return model
+	}
+
+	if config == nil {
+		return ""
+	}
+
+	if model == "" {
+		model = config.ChatGpt.OpenAIVisionModel
+	}
+	return model
+}
+
+func getEnv(key string) string {
 	value := os.Getenv(key)
 	if len(value) == 0 {
 		value = os.Getenv(strings.ToUpper(key))
 	}
 
 	if len(value) > 0 {
-		return &value
+		return value
 	}
 
 	if config == nil {
-		return nil
+		return ""
 	}
 
 	if len(value) > 0 {
-		return &value
+		return value
 	}
 
-	if config.ChatGpt.WechatKeyword != nil {
-		value = *config.ChatGpt.WechatKeyword
+	if config.ChatGpt.WechatKeyword != "" {
+		value = config.ChatGpt.WechatKeyword
 	}
-	return nil
+	return ""
 }

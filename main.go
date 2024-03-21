@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-	log.SetLevel(log.DebugLevel)
-	//log.SetLevel(log.InfoLevel)
+	log.SetLevel(log.InfoLevel)
 
 	log.SetReportCaller(true)
 	log.SetFormatter(&log.TextFormatter{
@@ -25,9 +24,9 @@ func main() {
 
 	wechatEnv := config.GetWechat()
 	telegramEnv := config.GetTelegram()
-	if wechatEnv != nil && *wechatEnv == "true" {
+	if wechatEnv == "true" {
 		bootstrap.StartWebChat()
-	} else if telegramEnv != nil {
+	} else if telegramEnv != "" {
 		bootstrap.StartTelegramBot()
 	}
 
