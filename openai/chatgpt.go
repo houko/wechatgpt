@@ -194,7 +194,7 @@ func (s *Session) Completions(sender string, msg string, imagePath []string) (st
 	}
 
 	if response.StatusCode != 200 {
-		return "", errors.New("openai response status code is not 200")
+		return "", errors.New(fmt.Sprintf("openai response status code is not 200, %v", response.StatusCode))
 	}
 
 	defer response.Body.Close()
@@ -288,7 +288,7 @@ func (s *Session) ImageGeneration(sender string, msg string) (string, error) {
 	}
 
 	if response.StatusCode != 200 {
-		return "", errors.New("openai response status code is not 200")
+		return "", errors.New(fmt.Sprintf("openai response status code is not 200, %v", response.StatusCode))
 	}
 
 	defer response.Body.Close()
