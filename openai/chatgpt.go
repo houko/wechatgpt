@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/pkg/errors"
 	"github.com/samber/lo"
 	"io"
-	"mime/multipart"
 	"net/http"
 	"os"
 	"wechatbot/config"
@@ -53,11 +52,10 @@ type ChatGPTVisionRequestBody struct {
 
 type ImageGenRequestBody struct {
 	Model          string `json:"model"`
-	Prompt         string `json:"prompt,omitempty"`
+	Prompt         string `json:"prompt"`
 	N              int    `json:"n"`
 	Size           string `json:"size"`
 	ResponseFormat string `json:"response_format"`
-	Image          []byte `json:"image,omitempty"`
 }
 
 type ImageGenResponseBody struct {
@@ -138,7 +136,7 @@ func (s *Session) Completions(sender string, msg string, imagePath []string) (st
 
 	// gpt-vision
 	if len(imagePath) > 0 {
-		requestBody := &ChatGPTVisionRequestBody{
+		requestBody := ChatGPTVisionRequestBody{
 			Model: config.GetOpenAiVisionModel(),
 			Messages: []VisionMessage{
 				{
@@ -262,7 +260,7 @@ func (s *Session) ImageGeneration(sender string, msg string) (string, error) {
 
 	var requestData []byte
 	var err error
-	requestBody := &ImageGenRequestBody{
+	requestBody := ImageGenRequestBody{
 		Model:          config.GetOpenAiImageGenModel(),
 		Prompt:         msg,
 		N:              1,
@@ -296,174 +294,6 @@ func (s *Session) ImageGeneration(sender string, msg string) (string, error) {
 	defer response.Body.Close()
 
 	body, err := io.ReadAll(response.Body)
-	if err != nil {
-		return "", err
-	}
-
-	log.Infof("openai response body: %v", string(body))
-
-	imageGenResponseBody := &ImageGenResponseBody{}
-	err = json.Unmarshal(body, imageGenResponseBody)
-	if err != nil {
-		log.Error(err)
-		return "", err
-	}
-
-	if len(imageGenResponseBody.Data) > 0 {
-		return imageGenResponseBody.Data[0].Url, nil
-	}
-	return "", nil
-}
-
-func (s *Session) ImageEdit(sender string, msg string, imagePath string) (string, error) {
-	if imagePath == "" {
-		return "", errors.New("image path is empty")
-	}
-
-	if s.ContextMgr[sender] == nil {
-		s.ContextMgr[sender] = NewContextMgr()
-	}
-	contextMgr := s.ContextMgr[sender]
-
-	var messages []ChatMessage
-	messages = append(messages, ChatMessage{
-		Role:    "system",
-		Content: systemPrompt,
-	})
-	messages = append(messages, contextMgr.BuildMsg()...)
-	messages = append(messages, ChatMessage{
-		Role:    "user",
-		Content: msg,
-	})
-
-	file, err := os.Open(imagePath)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to open image file")
-	}
-	defer file.Close()
-
-	var buffer bytes.Buffer
-	writer := multipart.NewWriter(&buffer)
-
-	fileWriter, err := writer.CreateFormFile("image", imagePath)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to create form file")
-	}
-	_, err = io.Copy(fileWriter, file)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to copy file")
-	}
-
-	err = writer.WriteField("n", "1")
-	if err != nil {
-		return "", errors.Wrap(err, "failed to write field")
-	}
-	err = writer.WriteField("size", "1024x1024")
-	if err != nil {
-		return "", errors.Wrap(err, "failed to write field")
-	}
-	err = writer.WriteField("prompt", msg)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to write field")
-	}
-
-	contentType := writer.FormDataContentType()
-	writer.Close()
-
-	req, err := http.NewRequest("POST", "https://api.openai.com/v1/images/edits", &buffer)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to create request")
-	}
-
-	req.Header.Set("Content-Type", contentType)
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", s.ApiKey))
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to do request")
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return "", errors.New(fmt.Sprintf("openai response status code is not 200, %v", resp.StatusCode))
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	log.Infof("openai response body: %v", string(body))
-
-	imageGenResponseBody := &ImageGenResponseBody{}
-	err = json.Unmarshal(body, imageGenResponseBody)
-	if err != nil {
-		log.Error(err)
-		return "", err
-	}
-
-	if len(imageGenResponseBody.Data) > 0 {
-		return imageGenResponseBody.Data[0].Url, nil
-	}
-	return "", nil
-}
-
-func (s *Session) ImageVariation(imagePath string) (string, error) {
-	if imagePath == "" {
-		return "", errors.New("image path is empty")
-	}
-
-	file, err := os.Open(imagePath)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to open image file")
-	}
-	defer file.Close()
-
-	var buffer bytes.Buffer
-	writer := multipart.NewWriter(&buffer)
-
-	fileWriter, err := writer.CreateFormFile("image", imagePath)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to create form file")
-	}
-	_, err = io.Copy(fileWriter, file)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to copy file")
-	}
-
-	err = writer.WriteField("n", "1")
-	if err != nil {
-		return "", errors.Wrap(err, "failed to write field")
-	}
-	err = writer.WriteField("size", "1024x1024")
-	if err != nil {
-		return "", errors.Wrap(err, "failed to write field")
-	}
-
-	contentType := writer.FormDataContentType()
-	writer.Close()
-
-	req, err := http.NewRequest("POST", "https://api.openai.com/v1/images/variations", &buffer)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to create request")
-	}
-
-	req.Header.Set("Content-Type", contentType)
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", s.ApiKey))
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to do request")
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return "", errors.New(fmt.Sprintf("openai response status code is not 200, %v", resp.StatusCode))
-	}
-
-	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
