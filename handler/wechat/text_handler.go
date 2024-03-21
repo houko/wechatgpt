@@ -36,15 +36,33 @@ func TextMessageHandler(msg *Message) error {
 
 	log.Infof("问题：%s, typ: %v", requestText, msg.typ)
 	reply := ""
-	if msg.typ == VisionMessageText {
+
+	switch msg.typ {
+	case TextMessageVisionChat:
 		reply, err = openai.GlobalSession.Completions(sender.UserName, requestText, lo.Map(msg.related, func(m *Message, i int) string {
 			return m.imagePathIfPicture
 		}))
 		messageCache.Delete(sender.UserName)
-	} else if msg.typ == ImageGenMessage {
+	case TextMessageImageGen:
 		reply, err = openai.GlobalSession.ImageGeneration(sender.UserName, requestText)
-	} else if msg.typ == TextMessage {
+	case TextMessageImageEdit:
+		if len(msg.related) == 0 {
+			log.Errorf("No related message found: %v", msg)
+			msg.ReplyText("No related message found")
+			return nil
+		}
+		reply, err = openai.GlobalSession.ImageEdit(sender.UserName, requestText, msg.related[0].imagePathIfPicture)
+	case TextMessageImageVariate:
+		if len(msg.related) == 0 {
+			log.Errorf("No related message found: %v", msg)
+			msg.ReplyText("No related message found")
+			return nil
+		}
+		reply, err = openai.GlobalSession.ImageVariation(msg.related[0].imagePathIfPicture)
+	case TextMessage:
 		reply, err = openai.GlobalSession.Completions(sender.UserName, requestText, nil)
+	default:
+		return nil
 	}
 
 	if err != nil {
