@@ -1,8 +1,6 @@
 package bootstrap
 
 import (
-	"os"
-
 	"wechatbot/handler/wechat"
 
 	"github.com/eatmoreapple/openwechat"
@@ -12,22 +10,15 @@ import (
 func StartWebChat() {
 	log.Info("Start WebChat Bot")
 	bot := openwechat.DefaultBot(openwechat.Desktop)
-	bot.MessageHandler = wechat.Handler
+	bot.MessageHandler = wechat.Handler.AsMessageHandler()
 	bot.UUIDCallback = openwechat.PrintlnQrcodeUrl
 
-	reloadStorage := openwechat.NewJsonFileHotReloadStorage("token.json")
-	err := bot.HotLogin(reloadStorage)
+	reloadStorage := openwechat.NewFileHotReloadStorage("storage.json")
+	defer reloadStorage.Close()
+	err := bot.PushLogin(reloadStorage, openwechat.NewRetryLoginOption())
 	if err != nil {
-		err := os.Remove("token.json")
-		if err != nil {
-			return
-		}
-
-		reloadStorage = openwechat.NewJsonFileHotReloadStorage("token.json")
-		err = bot.HotLogin(reloadStorage)
-		if err != nil {
-			return
-		}
+		log.Fatal(err)
+		return
 	}
 
 	// 获取登陆的用户

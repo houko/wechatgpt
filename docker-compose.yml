@@ -1,10 +1,15 @@
 version: '2.4'
 services:
   wechatgpt:
-    image: xiaomoinfo/wechatgpt:v3.0.1
+    container_name: wechatgpt
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      api_key: your_api_key
+      api_key: "YOUR_API_KEY"
+      openai_text_model: gpt-4-0125-preview
+      openai_image_gen_model: dall-e-3
+      openai_vision_model: gpt-4-vision-preview
       wechat: "true"
-      wechat_keyword: 小莫
     command: ./server
     restart: always

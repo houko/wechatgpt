@@ -1,6 +1,6 @@
-FROM golang:1.19-alpine as builder
+FROM golang:1.21-alpine as builder
 
-RUN apk --no-cache add git && export GOPRIVATE=github.com/houko/wechatgpt && \
+RUN apk --no-cache add git && export GOPRIVATE=github.com/t3ls/wechatgpt && \
     export GOPROXY=https://goproxy.cn,direct
 
 COPY . /root/build
